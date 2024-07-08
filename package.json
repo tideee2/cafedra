@@ -6,10 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lin:next": "next lint",
+    "lint": "oxlint && eslint",
+    "lint:fix": "oxlint --fix && eslint --fix"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
     "@eslint/eslintrc": "^3.1.0",
+    "@mui/material": "^5.16.0",
     "eslint-plugin-react": "^7.34.3",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-simple-import-sort": "^12.1.1",
