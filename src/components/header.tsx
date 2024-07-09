@@ -33,7 +33,7 @@ export default function Header() {
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <Link className="flex flex-shrink flex-grow-0 items-center" href="/">
                   <Image alt="logo" height={100} priority src="/images/logo.svg" width={100} />
-                  <h1 className="hidden pl-1 lg:pl-2 md:flex text-white text-sm lg:text-base min-w-40">Кафедра якогось університету</h1>
+                  <h1 className="hidden pl-1 lg:pl-2 md:flex text-white text-sm lg:text-base min-w-40 hover:text-primary">Кафедра якогось університету</h1>
                 </Link>
                 <div className="flex-1"></div>
                 <div className="hidden md:ml-6 md:flex items-center">
