@@ -13,11 +13,20 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      backgroundSize: {
+        'auto': 'auto',
+        'cover': 'cover',
+        'contain': 'contain',
+        '80-100': '80% 100%',
+        '16': '4rem',
+      },
     },
     colors: {
       'custom-blue': '#002B6E',
       'white': '#fff',
       'primary': '#FFBC0F',
+      'secondary-bg': '#D6E6FF',
+      'text-primary': '#051C40',
     },
   },
   plugins: [
