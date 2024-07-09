@@ -27,6 +27,7 @@ const config: Config = {
       'primary': '#FFBC0F',
       'secondary-bg': '#D6E6FF',
       'text-primary': '#051C40',
+      'gray': '#5E6063',
     },
   },
   plugins: [

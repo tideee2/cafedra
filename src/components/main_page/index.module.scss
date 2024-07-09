@@ -1,0 +1,13 @@
+.cardTitleLine {
+  position: relative;
+
+  &:after {
+    position: absolute;
+    content: '';
+    left: 0;
+    width: 80px;
+    height: 1px;
+    background: #5E6063;
+    bottom: -10px;
+  }
+}
