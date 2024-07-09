@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import styles from '@/components/main_page/index.module.scss'
 
+// todo get this data from server
 const mainPageData = {
   title: 'Факультетське життя',
   items: [
