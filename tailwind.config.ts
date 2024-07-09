@@ -20,6 +20,16 @@ const config: Config = {
       'primary': '#FFBC0F',
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }: any) {
+      addUtilities({
+        '.border-b-2-transparent': {
+          borderBottomWidth: '2px',
+          borderBottomColor: 'transparent',
+          borderBottomStyle: 'solid',
+        },
+      })
+    },
+  ],
 }
 export default config

@@ -1,0 +1,8 @@
+.logoLink {
+  &:hover {
+    h1, svg {
+      fill: #FFBC0F;
+      color: #FFBC0F;
+    }
+  }
+}
