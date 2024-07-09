@@ -31,3 +31,8 @@ body {
     text-wrap: balance;
   }
 }
+/* todo replace to header component */
+.active-link {
+  border-bottom: 3px solid #FFBC0F;
+  color: #FFBC0F;
+}

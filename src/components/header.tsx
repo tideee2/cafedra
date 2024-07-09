@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { headerLinks } from '@/constants/header'
 
 export default function Header() {
@@ -12,10 +13,12 @@ export default function Header() {
     setHeaderMenuVisible(!headerMenuVisible)
   }
 
+  const pathname = usePathname()
+  const linkStyle = 'flex align-items-center px-1 lg:px-3 py-2 text-sm font-medium text-white hover:text-primary whitespace-nowrap'
   const links = headerLinks.map(link => (
     <Link
       aria-current="page"
-      className="flex align-items-center px-1 lg:px-3 py-2 text-sm font-medium text-white hover:text-primary whitespace-nowrap"
+      className={`${linkStyle} ${pathname === link.href ? 'active-link' : ''}`}
       href={link.href}
       key={link.href}
     >{link.title}
