@@ -20,14 +20,14 @@ const config: Config = {
         '80-100': '80% 100%',
         '16': '4rem',
       },
-    },
-    colors: {
-      'custom-blue': '#002B6E',
-      'white': '#fff',
-      'primary': '#FFBC0F',
-      'secondary-bg': '#D6E6FF',
-      'text-primary': '#051C40',
-      'gray': '#5E6063',
+      colors: {
+        'custom-blue': '#002B6E',
+        'white': '#fff',
+        'primary': '#FFBC0F',
+        'secondary-bg': '#D6E6FF',
+        'text-primary': '#051C40',
+        'gray': '#5E6063',
+      },
     },
   },
   plugins: [
