@@ -1,3 +1,5 @@
+'use client'
+
 import CustomButton from '@/components/custom-button'
 
 export default function SearchScienceWork() {

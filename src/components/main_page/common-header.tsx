@@ -4,7 +4,6 @@
 import type { IHeaderInfo } from '@/interfaces/header-interfaces'
 
 export default function CommonHeaderContent({ props }: { props: IHeaderInfo }) {
-  console.log(props)
   return (
     <>
       <section

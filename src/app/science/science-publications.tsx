@@ -1,3 +1,5 @@
+'use client'
+
 import { tempSciencePublications } from '@/app/science/temp_science-publications'
 import styles from '@/components/global-styles.module.scss'
 import CustomButton from '@/components/custom-button'
@@ -14,7 +16,7 @@ export default function SciencePublications() {
             <h3 className="mb-5 font-black text-4xl self-start">Усі публікаці факультету</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7 text-text-primary my-12">
               { tempSciencePublications.map(publication => (
-                <div className="p-7 bg-secondary-white flex flex-col">
+                <div className="p-7 bg-secondary-white flex flex-col" key={publication.id}>
                   <h3 className="font-bold text-xl mb-5">{ publication.title }</h3>
                   <p
                     className={`text-xl mb-10 ${styles.cardTitleLine}`}
