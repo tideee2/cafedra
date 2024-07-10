@@ -29,6 +29,7 @@ const config: Config = {
       'text-primary': '#051C40',
       'gray': '#5E6063',
       'custom-black': '#020D1D',
+      'secondary-blue': '#F0F6FF',
     },
   },
   plugins: [
