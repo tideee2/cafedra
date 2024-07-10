@@ -22,11 +22,14 @@ export default function SciencePublications() {
                     style={{ '--bottom-line-position': '-20px' }}
                   >{ sliceStr(publication.content) }
                   </p>
+                  <div className="flex-1"></div>
                   <div className="mb-5">
                     <span className="font-bold text-xl">Автор:</span><br />
                     <span>{ publication.author }</span>
                   </div>
-                  <CustomButton props={{ outlined: true }}>Читати далі</CustomButton>
+                  <CustomButton props={{ outlined: true, type: 'link', href: `/science/${publication.id}` }}>Читати
+                    далі
+                  </CustomButton>
                 </div>
               )) }
             </div>

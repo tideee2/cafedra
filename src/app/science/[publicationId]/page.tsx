@@ -7,8 +7,18 @@ import { tempSciencePublications } from '@/app/science/temp_science-publications
 import CustomButton from '@/components/custom-button'
 import DownloadIcon from '@/components/icons/download-icon'
 
-export default function SciencePage() {
-  const data = tempSciencePublications[0]
+interface Props {
+  params: {
+    publicationId: number
+  }
+}
+export default function SciencePage({ params }: Props) {
+  const data = tempSciencePublications.find(publication => publication.id === Number(params.publicationId))
+
+  if (!data) {
+    return <h1>Error</h1>
+  }
+
   const publicationContent = data.content.split('\n')
     .map(paragraph => `<p>${paragraph}</p>`).join('')
   return (
@@ -19,7 +29,7 @@ export default function SciencePage() {
             <BackArrowIcon />
             <span className="text-xl font-bold">До списку публікацій</span>
           </Link>
-          <div className="flex flex-col w-4/5 text-text-primary pb-5">
+          <div className="flex flex-col w-4/5 text-text-primary pb-5 mb-4">
             <h1 className="pt-12 pb-10 text-5xl">{data.title}</h1>
             <div className="flex gap-14 mb-14">
               <div className="">
