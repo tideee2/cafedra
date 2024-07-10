@@ -7,7 +7,7 @@ export default function CustomButton({ props, children, className }: Partial<{ c
   }
   return (
     <button
-      className={`bg-primary text-text-primary text-lg font-bold hover:opacity-80 py-5 px-6 ${classes}`}
+      className={`bg-primary text-text-primary text-lg font-bold hover:opacity-80 py-5 px-6 ${classes} ${className}`}
     >
       {children}
     </button>
