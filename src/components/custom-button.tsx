@@ -1,7 +1,10 @@
 import type { ReactNode } from 'react'
 import Link from 'next/link'
 
-export default function CustomButton({ props, children, className, type }: Partial<{ children: ReactNode, props: any, className: string, type: string }>) {
+export default function CustomButton(
+  { props, children, className, type, onClick }:
+  Partial<{ children: ReactNode, props: any, className: string, type: string, onClick: () => void }>,
+) {
   const classes = []
   if (props?.outlined) {
     classes.push('w-full border-2 border-primary bg-white')
@@ -28,6 +31,7 @@ export default function CustomButton({ props, children, className, type }: Parti
   return (
     <button
       className={`hover:opacity-80 py-5 px-6 ${classes} ${className}`}
+      onClick={onClick}
     >
       {children}
     </button>

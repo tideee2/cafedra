@@ -1,8 +1,14 @@
 'use client'
 
+import { createRef } from 'react'
 import CustomButton from '@/components/custom-button'
 
 export default function SearchScienceWork() {
+  const onSearch = () => {
+    console.log('search')
+    console.log(input.current?.value)
+  }
+  const input = createRef<HTMLInputElement>()
   return (
     <>
       <div className="w-full bg-update-blue">
@@ -12,8 +18,13 @@ export default function SearchScienceWork() {
               Пошук&nbsp;публікацій
             </div>
             <div className="flex justify-center px-4 gap-5 w-full">
-              <input className="flex-1 py-5 px-6 w-full lg:min-w-[400px] placeholder-gray placeholde:font-normal text-lg font-bold text-text-primary" placeholder="Введіть назву або ключове слово" type="text" />
-              <CustomButton type="regular">Шукати</CustomButton>
+              <input
+                className="flex-1 py-5 px-6 w-full lg:min-w-[400px] placeholder-gray placeholde:font-normal text-lg font-bold text-text-primary"
+                placeholder="Введіть назву або ключове слово"
+                ref={input}
+                type="text"
+              />
+              <CustomButton onClick={onSearch} type="regular">Шукати</CustomButton>
             </div>
           </div>
         </div>
