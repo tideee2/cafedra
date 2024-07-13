@@ -14,10 +14,10 @@ export default function Header() {
 
   return (
     <>
-      <header className="w-full bg-custom-blue">
+      <header className="w-full bg-white">
         <nav className="">
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-            <div className="relative flex h-16 items-center justify-between">
+            <div className="relative flex py-3 items-center justify-between">
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <HeaderLogo />
                 <div className="flex-1"></div>
@@ -27,7 +27,7 @@ export default function Header() {
                   </div>
                 </div>
               </div>
-              <div className="absolute inset-y-0 right-0 flex items-center md:hidden text-white">
+              <div className="absolute inset-y-0 right-0 flex items-center md:hidden">
                 <HeaderMenuButton onClick={changeMenuVisibility} />
               </div>
             </div>

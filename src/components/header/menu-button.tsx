@@ -5,7 +5,7 @@ export default function HeaderMenuButton({ onClick }: any) {
       <button
         aria-controls="mobile-menu"
         aria-expanded="false"
-        className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+        className="relative inline-flex items-center justify-center rounded-md p-2 text-update-primary hover:text-primary hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
         onClick={onClick}
         type="button"
       >
