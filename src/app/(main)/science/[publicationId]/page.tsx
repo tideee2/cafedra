@@ -3,7 +3,7 @@
 
 import Link from 'next/link'
 import BackArrowIcon from '@/components/icons/back-arrow'
-import { tempSciencePublications } from '@/app/science/temp_science-publications'
+import { tempSciencePublications } from '@/app/(main)/science/temp_science-publications'
 import CustomButton from '@/components/custom-button'
 import DownloadIcon from '@/components/icons/download-icon'
 

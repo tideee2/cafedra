@@ -1,6 +1,6 @@
 'use client'
 
-import { tempSciencePublications } from '@/app/science/temp_science-publications'
+import { tempSciencePublications } from '@/app/(main)/science/temp_science-publications'
 import styles from '@/components/global-styles.module.scss'
 import CustomButton from '@/components/custom-button'
 
