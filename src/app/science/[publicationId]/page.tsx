@@ -30,26 +30,26 @@ export default function SciencePage({ params }: Props) {
             <span className="text-xl font-bold">До списку публікацій</span>
           </Link>
           <div className="flex flex-col w-4/5 text-text-primary pb-5 mb-4">
-            <h1 className="pt-12 pb-10 text-5xl">{data.title}</h1>
+            <h1 className="pt-12 pb-10 text-5xl text-update-blue">{data.title}</h1>
             <div className="flex gap-14 mb-14">
               <div className="">
-                <span className="text-xl font-bold mr-1.5">Автор:</span>
-                <span>{ data.author }</span>
+                <span className="text-xl font-bold mr-1.5 text-update-blue">Автор:</span>
+                <span className="text-update-blue">{ data.author }</span>
               </div>
               <div className="">
-                <span className="text-xl font-bold mr-1.5">Категорія:</span>
-                <span>{ data.categories[0] }</span>
+                <span className="text-xl font-bold mr-1.5 text-update-blue">Категорія:</span>
+                <span className="text-update-blue">{ data.categories[0] }</span>
               </div>
               <div className="">
-                <span className="text-xl font-bold mr-1.5">Автор:</span>
-                <span>{ data.dateStr }</span>
+                <span className="text-xl font-bold mr-1.5 text-update-blue">Автор:</span>
+                <span className="text-update-blue">{ data.dateStr }</span>
               </div>
             </div>
             <div className="flex flex-col gap-2" dangerouslySetInnerHTML={{ __html: publicationContent }}></div>
           </div>
 
           <div className="flex justify-start">
-            <CustomButton className="flex gap-1">
+            <CustomButton className="flex gap-1" type="regular">
               <DownloadIcon />
               <span>Завантажити увесь текст</span>
             </CustomButton>
