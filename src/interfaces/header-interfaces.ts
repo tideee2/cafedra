@@ -3,7 +3,13 @@ export interface IHeaderLink {
   href: string
 }
 
+export enum HeaderType {
+  Main,
+  Science,
+}
+
 export interface IHeaderInfo {
+  type: HeaderType
   title: string
   img: string
   descriptionItems: {

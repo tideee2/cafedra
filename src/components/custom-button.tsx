@@ -1,16 +1,23 @@
 import type { ReactNode } from 'react'
 import Link from 'next/link'
 
-export default function CustomButton({ props, children, className }: Partial<{ children: ReactNode, props: any, className: string }>) {
+export default function CustomButton({ props, children, className, type }: Partial<{ children: ReactNode, props: any, className: string, type: string }>) {
   const classes = []
   if (props?.outlined) {
     classes.push('w-full border-2 border-primary bg-white')
+  }
+
+  if (type === 'regular') {
+    classes.push('bg-light-green text-update-primary font-bold uppercase rounded-lg font-calibri text-2xl')
+  }
+  else {
+    classes.push('bg-primary text-text-primary text-lg font-bold')
   }
   if (props?.type === 'link') {
     return (
       <>
         <Link
-          className={`bg-primary text-text-primary text-lg font-bold hover:opacity-80 py-5 px-6 ${classes} ${className}`}
+          className={`w-fit self-center text-center text-text-primary text-xl font-bold hover:opacity-80 py-5 px-6 ${classes} ${className}`}
           href={props.href}
         >
           { children }
@@ -20,7 +27,7 @@ export default function CustomButton({ props, children, className }: Partial<{ c
   }
   return (
     <button
-      className={`bg-primary text-text-primary text-lg font-bold hover:opacity-80 py-5 px-6 ${classes} ${className}`}
+      className={`hover:opacity-80 py-5 px-6 ${classes} ${className}`}
     >
       {children}
     </button>

@@ -1,5 +1,6 @@
 import type { IHeaderLink } from '@/interfaces/headerLink'
 import type { IHeaderInfo } from '@/interfaces/header-interfaces'
+import { HeaderType } from '@/interfaces/header-interfaces'
 
 export const headerLinks: IHeaderLink[] = [
   {
@@ -24,6 +25,7 @@ export const headerLinks: IHeaderLink[] = [
   },
 ]
 export const mainPageHeaderInfo: IHeaderInfo = {
+  type: HeaderType.Main,
   title: 'Кафедра інформаційних систем та мереж',
   img: '/images/new_main_bg.svg',
   descriptionItems: [
@@ -40,8 +42,9 @@ export const mainPageHeaderInfo: IHeaderInfo = {
 }
 
 export const sciencePageHeaderInfo: IHeaderInfo = {
+  type: HeaderType.Science,
   title: 'Наукова робота',
-  img: '/images/science_bg.png',
+  img: '/images/bg/science_main_bg.svg',
   descriptionItems: [
     {
       text: 'Наукова робота в університеті здійснюється під егідою провідних академіків і дослідників, що забезпечують найвищий рівень досліджень. Ми заохочуємо студентів долучатися до наших дослідницьких груп, формуючи дослідницькі навички в рамках реальних проектів та проводячи роботи, які мають велику вагу у нашому сучасному технологічному світі.',

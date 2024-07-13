@@ -15,7 +15,7 @@ const config: Config = {
       },
 
       fontFamily: {
-        Calibri: ['Calibri', 'sans-serif'],
+        calibri: ['Calibri', 'sans-serif'],
       },
       backgroundSize: {
         'auto': 'auto',
@@ -34,10 +34,11 @@ const config: Config = {
         'custom-black': '#020D1D',
         'secondary-white': '#F0F6FF',
         'secondary-blue': '#1E498B',
-        'update-primary': '#2e3c42',
+        'update-primary': '#29383e',
         'green': '#829e27',
         'update-bg': '#ededed',
         'update-blue': '#3a72b7',
+        'light-green': '#b7d972',
       },
     },
   },

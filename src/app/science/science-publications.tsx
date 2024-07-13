@@ -10,14 +10,14 @@ function sliceStr(str: string, count = 100) {
 export default function SciencePublications() {
   return (
     <>
-      <div className="w-full bg-white py-20">
+      <div className="w-full bg-update-bg pt-5 pb-10">
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-          <div className="flex flex-col justify-between items-center py-12">
-            <h3 className="mb-5 font-black text-4xl self-start">Усі публікаці факультету</h3>
+          <div className="flex flex-col justify-between items-center pt-12 pb-6">
+            <h3 className="mb-5 text-green text-center font-black text-4xl self-center">Усі публікаці факультету</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7 text-text-primary my-12">
               { tempSciencePublications.map(publication => (
-                <div className="p-7 bg-secondary-white flex flex-col" key={publication.id}>
-                  <h3 className="font-bold text-xl mb-5">{ publication.title }</h3>
+                <div className="p-7 bg-white flex flex-col" key={publication.id}>
+                  <h3 className="font-bold text-xl mb-5 text-update-blue">{ publication.title }</h3>
                   <p
                     className={`text-xl mb-10 ${styles.cardTitleLine}`}
                     // @ts-expect-error todo find how fix error with custom css props
@@ -26,10 +26,10 @@ export default function SciencePublications() {
                   </p>
                   <div className="flex-1"></div>
                   <div className="mb-5">
-                    <span className="font-bold text-xl">Автор:</span><br />
-                    <span>{ publication.author }</span>
+                    <span className="font-bold text-xl text-update-blue">Автор:</span><br />
+                    <span className="text-update-blue">{ publication.author }</span>
                   </div>
-                  <CustomButton props={{ outlined: true, type: 'link', href: `/science/${publication.id}` }}>Читати
+                  <CustomButton props={{ type: 'link', href: `/science/${publication.id}` }} type="regular">Читати
                     далі
                   </CustomButton>
                 </div>
@@ -37,7 +37,7 @@ export default function SciencePublications() {
             </div>
           </div>
           <div className="flex justify-center">
-            <CustomButton>Завантажити ще</CustomButton>
+            <CustomButton type="regular">Завантажити ще</CustomButton>
           </div>
         </div>
       </div>
