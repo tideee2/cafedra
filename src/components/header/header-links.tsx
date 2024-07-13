@@ -5,7 +5,7 @@ import styles from '@/components/header/styles.module.scss'
 
 export default function HeaderLinks() {
   const pathname = usePathname()
-  const linkStyle = 'flex align-items-center px-1 lg:px-3 py-2 text-sm font-medium update-primary hover:text-primary whitespace-nowrap border-b-2-transparent'
+  const linkStyle = 'flex align-items-center px-1 lg:px-3 py-2 text-sm font-medium hover:text-green whitespace-nowrap border-b-2-transparent'
   return headerLinks.map(link => (
     <Link
       aria-current="page"
