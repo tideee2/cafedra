@@ -1,14 +1,19 @@
 'use client'
 
-import { createRef } from 'react'
+import { useRef } from 'react'
+
+import { useRouter } from 'next/navigation'
 import CustomButton from '@/components/custom-button'
 
 export default function SearchScienceWork() {
+  const router = useRouter()
+  const searchField = useRef<HTMLInputElement | null>(null)
   const onSearch = () => {
-    console.log('search')
-    console.log(input.current?.value)
+    if (!searchField?.current?.value) {
+      return
+    }
+    router.push(`/science/search?q=${searchField?.current?.value}`)
   }
-  const input = createRef<HTMLInputElement>()
   return (
     <>
       <div className="w-full bg-update-blue">
@@ -21,7 +26,7 @@ export default function SearchScienceWork() {
               <input
                 className="flex-1 py-5 px-6 w-full lg:min-w-[400px] placeholder-gray placeholde:font-normal text-lg font-bold text-text-primary"
                 placeholder="Введіть назву або ключове слово"
-                ref={input}
+                ref={searchField}
                 type="text"
               />
               <CustomButton onClick={onSearch} type="regular">Шукати</CustomButton>
