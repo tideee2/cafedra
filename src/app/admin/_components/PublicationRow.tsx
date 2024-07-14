@@ -2,8 +2,13 @@ import type { SciencePublication } from '@/interfaces/science'
 import EditIcon from '@/components/icons/EditIcon'
 import DeleteIcon from '@/components/icons/DeleteIcon'
 
+interface PublicationRowProps {
+  publication: SciencePublication
+  onEdit: () => void
+  onDelete: () => void
+}
 const sortOrder = ['id', 'title', 'author', 'categories', 'dateStr']
-export default function PublicationRow({ publication, onEdit }: { publication: SciencePublication, onEdit: () => void }) {
+export default function PublicationRow({ publication, onEdit, onDelete }: PublicationRowProps) {
   const readyPublication = sortOrder.map((key: string) => {
     return String(publication[key as keyof SciencePublication])
   })
@@ -21,7 +26,7 @@ export default function PublicationRow({ publication, onEdit }: { publication: S
           <button className="bg-update-blue p-1 mr-1 hover:opacity-80" onClick={onEdit}>
             <EditIcon className="size-4" />
           </button>
-          <button className="bg-red-300 text-red-800 p-1 hover:opacity-80">
+          <button className="bg-red-300 text-red-800 p-1 hover:opacity-80" onClick={onDelete}>
             <DeleteIcon className="size-4" />
           </button>
         </td>

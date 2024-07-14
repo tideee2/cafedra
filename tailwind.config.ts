@@ -41,6 +41,7 @@ const config: Config = {
         'light-green': '#b7d972',
         'secondary-blue2': '#D6E6FF',
         'gray-300': '#B6B9BE',
+        'custom-red': '#B90000',
       },
     },
   },
