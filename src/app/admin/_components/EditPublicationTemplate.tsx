@@ -53,9 +53,9 @@ export default function EditPublicationTemplate({ publication }: Partial<{ publi
               <div className="font-bold text-xl text-text-primary">Завантажте файл для повного ознайомлення</div>
               <div className="text-lg text-text-primary">Необхідний формат файлу: PDF</div>
             </div>
-            <CustomButton className="flex gap-2 items-center !p-4" type="regular">
+            <CustomButton className="flex gap-2 items-center !p-4 self-end " type="regular">
               <LoadIcon className="size-6" />
-              <span>Завантажити файл</span>
+              <span className="whitespace-nowrap">Завантажити файл</span>
             </CustomButton>
           </div>
         </div>

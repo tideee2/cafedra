@@ -15,16 +15,16 @@ export default function CreatePublicationHeader() {
 
         <div className="flex gap-2">
           <CustomButton
-            className="flex gap-2 items-center normal-case"
+            className="flex gap-2 items-center normal-case !p-4"
             props={{
               href: '/admin/science',
               type: 'link',
             }}
             type="regular"
-          ><CancelIcon className="size-8" />Відхилити
+          ><CancelIcon className="size-6" />Відхилити
           </CustomButton>
           <CustomButton
-            className="flex gap-2 items-center normal-case whitespace-nowrap !p-4"
+            className="flex gap-2 items-center normal-case whitespace-nowrap !p-4 !text-xl self-center"
             type="regular"
           ><SaveIcon className="size-6" />Створити та зберегти
           </CustomButton>

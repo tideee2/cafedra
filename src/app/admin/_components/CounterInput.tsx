@@ -25,7 +25,7 @@ function getElementType(type: string) {
   }
 }
 
-export default function CounterInput({ initialValue, title, maxCount, type, placeholder, showCounter = true }: Partial<InputInterface>) {
+export default function CounterInput({ initialValue = '', title, maxCount, type, placeholder, showCounter = true }: Partial<InputInterface>) {
   const [counter, setCounter] = useState(0)
   const [inputValue, setValue] = useState(initialValue)
   function onInput(event: BaseSyntheticEvent) {
@@ -40,6 +40,16 @@ export default function CounterInput({ initialValue, title, maxCount, type, plac
     setCounter((initialValue as string)?.length || 0)
   }, [initialValue])
 
+  function formatDate(strDate: string | undefined) {
+    if (!strDate) {
+      return ''
+    }
+    return strDate
+      .split('/')
+      .map(s => s.trim())
+      .reverse()
+      .join('-')
+  }
   return (
     <>
       <div className="flex flex-col">
@@ -70,7 +80,7 @@ export default function CounterInput({ initialValue, title, maxCount, type, plac
                     onInput={onInput}
                     placeholder={placeholder}
                     type={getElementType(type as string)}
-                    value={inputValue}
+                    value={type === 'datepicker' ? formatDate(inputValue) : inputValue}
                   />
                 )
           }
