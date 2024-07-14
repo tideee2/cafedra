@@ -1,7 +1,7 @@
 'use client'
 
 import type { BaseSyntheticEvent } from 'react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 interface InputInterface {
   title: string
@@ -9,6 +9,7 @@ interface InputInterface {
   showCounter: boolean
   type: 'regular' | 'select' | 'datepicker' | 'textarea'
   placeholder: string
+  initialValue: string
 }
 
 function getElementType(type: string) {
@@ -24,15 +25,20 @@ function getElementType(type: string) {
   }
 }
 
-export default function CounterInput({ title, maxCount, type, placeholder, showCounter = true }: Partial<InputInterface>) {
+export default function CounterInput({ initialValue, title, maxCount, type, placeholder, showCounter = true }: Partial<InputInterface>) {
   const [counter, setCounter] = useState(0)
-
+  const [inputValue, setValue] = useState(initialValue)
   function onInput(event: BaseSyntheticEvent) {
+    setValue(event.target.value)
     if (!showCounter) {
       return
     }
     setCounter(event.target.value.length)
   }
+
+  useEffect(() => {
+    setCounter((initialValue as string)?.length || 0)
+  }, [initialValue])
 
   return (
     <>
@@ -53,6 +59,7 @@ export default function CounterInput({ title, maxCount, type, placeholder, showC
                       id="counter"
                       onInput={onInput}
                       placeholder={placeholder}
+                      value={inputValue}
                     />
                   </>
                 )
@@ -63,6 +70,7 @@ export default function CounterInput({ title, maxCount, type, placeholder, showC
                     onInput={onInput}
                     placeholder={placeholder}
                     type={getElementType(type as string)}
+                    value={inputValue}
                   />
                 )
           }

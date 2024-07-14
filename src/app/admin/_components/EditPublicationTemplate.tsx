@@ -1,14 +1,17 @@
 import CounterInput from '@/app/admin/_components/CounterInput'
 import CustomButton from '@/components/custom-button'
 import LoadIcon from '@/components/icons/LoadIcon'
+import type { SciencePublication } from '@/interfaces/science'
 
-export default function EditPublicationTemplate() {
+export default function EditPublicationTemplate({ publication }: Partial<{ publication: SciencePublication }>) {
+  console.log(publication)
   return (
     <>
       <div className="flex flex-col p-10 bg-white">
         <div className="w-full w-max[800px] ">
           <div className="pb-8">
             <CounterInput
+              initialValue={publication?.title}
               maxCount={120}
               title="Назва публікаці"
               type="regular"
@@ -16,17 +19,20 @@ export default function EditPublicationTemplate() {
           </div>
           <div className="pb-8 flex justify-between gap-3">
             <CounterInput
+              initialValue={publication?.author}
               showCounter={false}
               title="Aвтор"
               type="regular"
             />
             <CounterInput
+              initialValue={publication?.categories?.join('')}
               placeholder="Введіть категорію"
               showCounter={false}
               title="Категорія"
               type="regular"
             />
             <CounterInput
+              initialValue={publication?.dateStr}
               placeholder="Виберіть дату"
               showCounter={false}
               title="Дата публікаці"
@@ -35,6 +41,7 @@ export default function EditPublicationTemplate() {
           </div>
           <div className="pb-8">
             <CounterInput
+              initialValue={publication?.content}
               placeholder="Вступне слово про тему та її актуальність"
               showCounter={false}
               title="Вступне слово"
