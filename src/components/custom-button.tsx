@@ -30,7 +30,7 @@ export default function CustomButton(
   }
   return (
     <button
-      className={`hover:opacity-80 py-5 px-6 ${classes} ${className}`}
+      className={`hover:opacity-80 ${classes} ${className} py-5 px-6`}
       onClick={onClick}
     >
       {children}
