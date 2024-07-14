@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import AdminSidebar from '@/app/admin/_components/AdminSidebar'
 
 export default function AdminLayout({
   children,
@@ -7,8 +8,10 @@ export default function AdminLayout({
 }>) {
   return (
     <>
-      <h1>test layout</h1>
-      {children}
+      <main className="grid grid-cols-[15rem_1fr]">
+        <AdminSidebar />
+        {children}
+      </main>
     </>
   )
 }
