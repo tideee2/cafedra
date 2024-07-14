@@ -1,3 +1,6 @@
+'use client'
+
+import { useRouter } from 'next/navigation'
 import type { SciencePublication } from '@/interfaces/science'
 import PublicationRow from '@/app/admin/_components/PublicationRow'
 
@@ -28,6 +31,11 @@ const TABLE_HEADERS = [
   },
 ]
 export default function SciencePublicationsTable({ data }: { data: SciencePublication[] }) {
+  const router = useRouter()
+
+  function editPublication(id: number) {
+    router.push(`/admin/science/edit/${id}`)
+  }
   return (
     <>
       <div className="relative overflow-x-auto">
@@ -36,7 +44,7 @@ export default function SciencePublicationsTable({ data }: { data: SciencePublic
             <tr className="">
               {
                 TABLE_HEADERS.map((header, index) => (
-                  <th className="px-6 py-3 bg-secondary-blue2 border-r-4 border-secondary-white" scope="col">
+                  <th className="px-6 py-3 bg-secondary-blue2 border-r-4 border-secondary-white" key={index} scope="col">
                     {header.label}
                   </th>
                 ))
@@ -46,7 +54,7 @@ export default function SciencePublicationsTable({ data }: { data: SciencePublic
           <tbody>
             {
               data.map((publication, _id) => (
-                <PublicationRow publication={publication} />
+                <PublicationRow key={_id} onEdit={() => editPublication(publication.id)} publication={publication} />
               ))
             }
           </tbody>
