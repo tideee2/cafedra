@@ -8,7 +8,7 @@ export default function AdminLayout({
 }>) {
   return (
     <>
-      <main className="grid grid-cols-[15rem_1fr]">
+      <main className="grid grid-cols-[15rem_1fr] bg-secondary-white">
         <AdminSidebar />
         {children}
       </main>

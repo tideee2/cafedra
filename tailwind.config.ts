@@ -39,6 +39,8 @@ const config: Config = {
         'update-bg': '#ededed',
         'update-blue': '#3a72b7',
         'light-green': '#b7d972',
+        'secondary-blue2': '#D6E6FF',
+        'gray-300': '#B6B9BE',
       },
     },
   },
