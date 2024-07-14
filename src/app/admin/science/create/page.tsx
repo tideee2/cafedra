@@ -16,9 +16,11 @@ export default function ScienceAdminPageCreate() {
 
           <div className="flex gap-2">
             <CustomButton
-              className="flex gap-2 items-center normal-case !p-2"
+              className="flex gap-2 items-center normal-case"
+              props={{ href: '/admin/science',
+                type: 'link' }}
               type="regular"
-            ><CancelIcon className="size-6" />Відхилити
+            ><CancelIcon className="size-8" />Відхилити
             </CustomButton>
             <CustomButton
               className="flex gap-2 items-center normal-case whitespace-nowrap !p-4"

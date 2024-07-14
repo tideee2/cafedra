@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import Link from 'next/link'
-
+// todo replace type, href to props
 export default function CustomButton(
   { props, children, className, type, onClick }:
   Partial<{ children: ReactNode, props: any, className: string, type: string, onClick: () => void }>,
