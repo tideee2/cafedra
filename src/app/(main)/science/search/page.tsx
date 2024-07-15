@@ -18,7 +18,7 @@ export default function ScienceSearchPage() {
   const [results, setResults] = useState<SciencePublication[]>([])
 
   useEffect(() => {
-    fetch('http://localhost:3000/api')
+    fetch('/api')
       .then(res => res.json())
       .then((data) => {
         setData(data)
@@ -28,6 +28,7 @@ export default function ScienceSearchPage() {
   }, [])
 
   useEffect(() => {
+    // eslint-disable-next-line style/no-mixed-operators
     const publications = data?.publications && data.publications.filter(p => search && p.title.includes(search)) || []
     setResults(publications)
   }, [search, data])
@@ -68,7 +69,7 @@ export default function ScienceSearchPage() {
                   <div className="pt-12 pb-10 text-5xl text-update-blue">Результати пошуку</div>
                 </div>
                 <div className="">
-                  За пошуковим запитом "<b>{ search }</b>" було знайдено { results.length } результат(ів).
+                  За пошуковим запитом &quot;<b>{ search }</b>&quot; було знайдено { results.length } результат(ів).
                 </div>
                 <div className="flex justify-center gap-5 w-full py-8">
                   <input
