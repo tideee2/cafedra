@@ -1,4 +1,4 @@
-import CounterInput from '@/app/admin/_components/CounterInput'
+import CounterInput from '@/components/form/CounterInput'
 import CustomButton from '@/components/custom-button'
 import LoadIcon from '@/components/icons/LoadIcon'
 import type { SciencePublication } from '@/interfaces/science'
