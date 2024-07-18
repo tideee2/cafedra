@@ -1,7 +1,7 @@
 'use client'
 
 import type { BaseSyntheticEvent } from 'react'
-import { useEffect, useId, useRef, useState } from 'react'
+import { forwardRef, useEffect, useId, useRef, useState } from 'react'
 
 import useOnMount from '@mui/utils/useOnMount'
 import OpenEyeIcon from '@/components/icons/OpenEyeIcon'
@@ -14,6 +14,7 @@ interface InputInterface {
   type: 'regular' | 'select' | 'datepicker' | 'textarea' | 'password'
   placeholder: string
   initialValue: string
+  id: string
 }
 
 function getElementType(type: string | undefined) {
@@ -30,15 +31,21 @@ function getElementType(type: string | undefined) {
       return 'text'
   }
 }
+export type Ref = HTMLInputElement | HTMLTextAreaElement
 
-export default function CounterInput({ initialValue = '', title, maxCount, type, placeholder, showCounter = true }: Partial<InputInterface>) {
+export default forwardRef<Ref, Partial<InputInterface>>(function CounterInput(
+  { id, initialValue = '', title, maxCount, type, placeholder, showCounter = true, ...props },
+  ref,
+) {
   const [counter, setCounter] = useState(0)
   const [inputValue, setValue] = useState(initialValue)
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false)
-  const id = useId()
+  const uniqId = useId()
+  if (!id) {
+    id = uniqId
+  }
   const [inputType, setInputType] = useState<string | undefined>('text')
-  const inputRef = useRef<HTMLInputElement>(null)
-
+  const inputRef = useRef<HTMLInputElement>()
   const additionalStyles = []
   if (type === 'password') {
     additionalStyles.push('pr-8')
@@ -119,9 +126,10 @@ export default function CounterInput({ initialValue = '', title, maxCount, type,
                     id={id}
                     onInput={onInput}
                     placeholder={placeholder}
-                    ref={inputRef}
+                    ref={ref as any}
                     type={inputType}
                     value={type === 'datepicker' ? formatDate(inputValue) : inputValue}
+                    {...props}
                   />
                 )
           }
@@ -136,4 +144,4 @@ export default function CounterInput({ initialValue = '', title, maxCount, type,
       </div>
     </>
   )
-}
+})
