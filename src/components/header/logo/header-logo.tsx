@@ -1,7 +1,12 @@
 import Link from 'next/link'
 import styles from './index.module.scss'
 
-export default function HeaderLogo({ className, type }: { className?: string, type?: string }) {
+interface LogoProps {
+  className: string
+  type: string
+  isShort: boolean
+}
+export default function HeaderLogo({ className, type, isShort }: Partial<LogoProps>) {
   const classes = `flex flex-shrink text-green flex-grow-0 items-center hover:text-primary hover:fill-primary ${styles.logoLink}`
   return (
     <Link className={classes + className} href="/">
@@ -20,7 +25,7 @@ export default function HeaderLogo({ className, type }: { className?: string, ty
         />
       </svg>
 
-      <h1 className={`flex pl-1 lg:pl-2 text-green font-bold uppercase text-sm lg:text-base ${type === 'sidebar' ? 'text-center' : 'min-w-40'}`}>Інформаційні<br />системи&nbsp;та<br />мережі
+      <h1 className={`${isShort ? 'hidden' : ''}  flex pl-1 lg:pl-2 text-green font-bold uppercase text-sm lg:text-base ${type === 'sidebar' ? 'text-center' : 'min-w-40'}`}>Інформаційні<br />системи&nbsp;та<br />мережі
       </h1>
     </Link>
   )
