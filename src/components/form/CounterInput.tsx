@@ -1,18 +1,22 @@
 'use client'
 
 import type { BaseSyntheticEvent } from 'react'
-import { useEffect, useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
+
+import useOnMount from '@mui/utils/useOnMount'
+import OpenEyeIcon from '@/components/icons/OpenEyeIcon'
+import ClosedEyeIcon from '@/components/icons/ClosedEyeIcon'
 
 interface InputInterface {
   title: string
   maxCount: number
   showCounter: boolean
-  type: 'regular' | 'select' | 'datepicker' | 'textarea'
+  type: 'regular' | 'select' | 'datepicker' | 'textarea' | 'password'
   placeholder: string
   initialValue: string
 }
 
-function getElementType(type: string) {
+function getElementType(type: string | undefined) {
   switch (type) {
     case 'regular':
       return 'text'
@@ -20,6 +24,8 @@ function getElementType(type: string) {
       return 'date'
     case 'textarea':
       return 'textarea'
+    case 'password':
+      return 'password'
     default:
       return 'text'
   }
@@ -28,6 +34,19 @@ function getElementType(type: string) {
 export default function CounterInput({ initialValue = '', title, maxCount, type, placeholder, showCounter = true }: Partial<InputInterface>) {
   const [counter, setCounter] = useState(0)
   const [inputValue, setValue] = useState(initialValue)
+  const [passwordVisible, setPasswordVisible] = useState<boolean>(false)
+  const id = useId()
+  const [inputType, setInputType] = useState<string | undefined>('text')
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  const additionalStyles = []
+  if (type === 'password') {
+    additionalStyles.push('pr-8')
+  }
+  useOnMount(() => {
+    setInputType(getElementType(type))
+  })
+
   function onInput(event: BaseSyntheticEvent) {
     setValue(event.target.value)
     if (!showCounter) {
@@ -50,23 +69,44 @@ export default function CounterInput({ initialValue = '', title, maxCount, type,
       .reverse()
       .join('-')
   }
+
+  const handleToggle = () => {
+    if (inputType === 'password') {
+      setInputType('text')
+      setPasswordVisible(false)
+    }
+    else {
+      setInputType('password')
+      setPasswordVisible(true)
+    }
+    setFocusToInput()
+  }
+
+  const setFocusToInput = () => {
+    setTimeout(() => {
+      if (inputRef?.current) {
+        inputRef.current?.focus()
+        inputRef.current.selectionStart = inputRef.current.selectionEnd = inputRef.current.value.length
+      }
+    }, 0)
+  }
   return (
     <>
       <div className="flex flex-col">
         <div className="flex justify-between pb-3">
-          <label className="text-lg font-bold" htmlFor="counter">{title}</label>
+          <label className="text-lg font-bold" htmlFor={id}>{title}</label>
           <div hidden={!showCounter}>
             {`${counter}/${maxCount}`}
           </div>
         </div>
-        <div className="w-full">
+        <div className="w-full relative">
           {
             type === 'textarea'
               ? (
                   <>
                     <textarea
                       className="w-full p-5 border-[3px] border-secondary-blue min-h-40"
-                      id="counter"
+                      id={id}
                       onInput={onInput}
                       placeholder={placeholder}
                       value={inputValue}
@@ -75,15 +115,23 @@ export default function CounterInput({ initialValue = '', title, maxCount, type,
                 )
               : (
                   <input
-                    className="w-full p-5 border-[3px] border-secondary-blue"
-                    id="counter"
+                    className={`w-full p-5 border-[3px] border-secondary-blue ${additionalStyles}`}
+                    id={id}
                     onInput={onInput}
                     placeholder={placeholder}
-                    type={getElementType(type as string)}
+                    ref={inputRef}
+                    type={inputType}
                     value={type === 'datepicker' ? formatDate(inputValue) : inputValue}
                   />
                 )
           }
+          {type === 'password'
+            ? (
+                <div className="absolute top-1/2 -translate-y-1/2 right-2 cursor-pointer" onClick={handleToggle}>
+                  {passwordVisible ? <OpenEyeIcon className="size-6" /> : <ClosedEyeIcon className="size-6" />}
+                </div>
+              )
+            : '' }
         </div>
       </div>
     </>
