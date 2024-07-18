@@ -16,11 +16,8 @@ export default function EditPublicationHeader() {
         <div className="flex gap-2">
           <CustomButton
             className="flex gap-2 items-center normal-case !p-4 self-center"
-            props={{
-              href: '/admin/science',
-              type: 'link',
-            }}
-            type="regular"
+            href="/admin/science"
+            type="regularLink"
           ><CancelIcon className="size-6" />Відхилити
           </CustomButton>
           <CustomButton

@@ -25,7 +25,12 @@ export default function ScienceAdminPage() {
       <main className="flex flex-col p-20">
         <div className="flex justify-between pb-14 whitespace-nowrap">
           <h1 className="font-black text-5xl text-update-primary">Наукова робота</h1>
-          <CustomButton className="flex gap-2 items-center normal-case self-center !p-4" props={{ type: 'link', href: '/admin/science/create' }} type="regular"><PlusIcon className="size-8" />Створити публікацію</CustomButton>
+          <CustomButton
+            className="flex gap-2 items-center normal-case self-center !p-4"
+            href="/admin/science/create"
+            type="regularLink"
+          ><PlusIcon className="size-8" />Створити публікацію
+          </CustomButton>
         </div>
         { isLoading
           ? <h1>Loading...</h1>

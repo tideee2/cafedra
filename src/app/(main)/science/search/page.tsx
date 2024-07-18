@@ -96,7 +96,7 @@ export default function ScienceSearchPage() {
                         <span className="font-bold text-xl text-update-blue">Автор:</span><br />
                         <span className="text-update-blue">{ publication.author }</span>
                       </div>
-                      <CustomButton props={{ type: 'link', href: `/science/${publication.id}` }} type="regular">Читати
+                      <CustomButton href={`/science/${publication.id}`} type="regularLink">Читати
                         далі
                       </CustomButton>
                     </div>
