@@ -6,6 +6,7 @@ import { forwardRef, useEffect, useId, useRef, useState } from 'react'
 import useOnMount from '@mui/utils/useOnMount'
 import OpenEyeIcon from '@/components/icons/OpenEyeIcon'
 import ClosedEyeIcon from '@/components/icons/ClosedEyeIcon'
+import { formatDate } from '@/hooks/utils'
 
 interface InputInterface {
   title: string
@@ -66,17 +67,6 @@ export default forwardRef<Ref, Partial<InputInterface>>(function CounterInput(
     setCounter((initialValue as string)?.length || 0)
   }, [initialValue])
 
-  function formatDate(strDate: string | undefined) {
-    if (!strDate) {
-      return ''
-    }
-    return strDate
-      .split('/')
-      .map(s => s.trim())
-      .reverse()
-      .join('-')
-  }
-
   const handleToggle = () => {
     if (inputType === 'password') {
       setInputType('text')
@@ -116,8 +106,11 @@ export default forwardRef<Ref, Partial<InputInterface>>(function CounterInput(
                       id={id}
                       onInput={onInput}
                       placeholder={placeholder}
+                      ref={ref as any}
                       value={inputValue}
-                    />
+                      {...props}
+                    >{inputValue}
+                    </textarea>
                   </>
                 )
               : (

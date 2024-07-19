@@ -3,7 +3,15 @@ import CustomButton from '@/components/custom-button'
 import CancelIcon from '@/components/icons/CancelIcon'
 import SaveIcon from '@/components/icons/SaveIcon'
 
-export default function CreatePublicationHeader() {
+interface Props {
+  onCancel?: (x: any) => void
+  onSave?: (x: any) => void
+}
+export default function CreatePublicationHeader({ ...props }: Props) {
+  const onSave = (x: any) => {
+    if (props.onSave)
+      props.onSave(x)
+  }
   return (
     <>
       <div className="flex justify-between pb-14">
@@ -22,6 +30,7 @@ export default function CreatePublicationHeader() {
           </CustomButton>
           <CustomButton
             className="flex gap-2 items-center normal-case whitespace-nowrap !p-4 !text-xl self-center"
+            onClick={(x: any) => onSave(x)}
             type="regular"
           ><SaveIcon className="size-6" />Створити та зберегти
           </CustomButton>

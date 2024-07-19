@@ -3,7 +3,7 @@ import Link from 'next/link'
 // todo replace type, href to props
 export default function CustomButton(
   { children, className, type, onClick, outlined, href, ...props }:
-  Partial<{ children: ReactNode, className: string, outlined: string, href: string, type: string, onClick: () => void }>,
+  Partial<{ children: ReactNode, className: string, outlined: string, href: string, type: string, onClick: (x?: any) => void }>,
 ) {
   const classes = []
   if (outlined) {
