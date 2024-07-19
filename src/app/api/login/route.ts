@@ -10,8 +10,16 @@ export async function POST(request: Request, response: Response) {
   const data = await request.json()
 
   if (data.login.toLowerCase() === 'admin' && data.password === '12345') {
-    return new Response('Ok')
+    return new Response(JSON.stringify({
+      statusText: 'Ok',
+      message: '',
+    }))
   }
 
-  return new Response('ne ok')
+  return new Response(JSON.stringify(
+    {
+      statusText: 'error',
+      message: 'Логін та пароль не співпадають',
+    },
+  ))
 }
