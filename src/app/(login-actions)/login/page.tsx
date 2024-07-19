@@ -19,10 +19,21 @@ export default function CommonScienceAdminPage() {
     },
   })
 
-  const test = (...x: any) => {
-    console.log(x, errors)
+  const onSubmit = (data: any, event: any) => {
+    fetch('/api/login', {
+      method: 'POST',
+      body: JSON.stringify({
+        login: data.login,
+        password: data.password,
+      }),
+    })
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
-  console.log(errors)
   return (
     <>
       <div className="px-8 sm:px-0 sm:w-[32rem] w-screen">
@@ -30,7 +41,7 @@ export default function CommonScienceAdminPage() {
           <HeaderLogo className="flex text-center justify-center gap-3 mb-8" isShort={true} type="sidebar" />
           <h3 className="font-black text-5xl text-text-primary mb-1 text-center">Вхід</h3>
           <p className="text-lg font-normal text-custom-black mb-5 text-center">Увійти як адміністратор</p>
-          <form onSubmit={handleSubmit(data => test(data))}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-10 h-[100px]">
               <CounterInput
                 id="login"
