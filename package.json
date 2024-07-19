@@ -23,8 +23,8 @@
     "google-map-react": "^2.2.1",
     "next": "14.2.4",
     "react": "^18",
-    "react-alert": "^7.0.3",
     "react-dom": "^18",
+    "react-hook-form": "^7.52.1",
     "sass": "^1.77.6"
   },
   "devDependencies": {
