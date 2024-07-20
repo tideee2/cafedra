@@ -103,13 +103,13 @@ export default forwardRef<Ref, Partial<InputInterface>>(function CounterInput(
                   <>
                     <textarea
                       className="w-full p-5 border-[3px] border-secondary-blue min-h-40"
+                      defaultValue={inputValue}
                       id={id}
                       onInput={onInput}
                       placeholder={placeholder}
                       ref={ref as any}
-                      value={inputValue}
                       {...props}
-                    >{inputValue}
+                    >
                     </textarea>
                   </>
                 )
