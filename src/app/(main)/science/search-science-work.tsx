@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { type KeyboardEvent, useRef, useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 import CustomButton from '@/components/custom-button'
@@ -9,10 +9,16 @@ export default function SearchScienceWork() {
   const router = useRouter()
   const searchField = useRef<HTMLInputElement | null>(null)
   const onSearch = () => {
-    if (!searchField?.current?.value) {
+    if (!searchField?.current?.value || searchField?.current?.value.length < 3) {
       return
     }
     router.push(`/science/search?q=${searchField?.current?.value}`)
+  }
+  const [searchFieldValue, setSearchFieldValue] = useState<string>('')
+  function keyDown(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      onSearch()
+    }
   }
   return (
     <>
@@ -25,11 +31,14 @@ export default function SearchScienceWork() {
             <div className="flex justify-center px-4 gap-5 w-full">
               <input
                 className="flex-1 py-5 px-6 w-full lg:min-w-[400px] placeholder-gray placeholde:font-normal text-lg font-bold text-text-primary"
+                onChange={e => setSearchFieldValue(e.target.value)}
+                onKeyDown={keyDown}
                 placeholder="Введіть назву або ключове слово"
                 ref={searchField}
                 type="text"
+                value={searchFieldValue}
               />
-              <CustomButton onClick={onSearch} type="regular">Шукати</CustomButton>
+              <CustomButton disabled={searchFieldValue.length < 3} onClick={onSearch} type="regular">Шукати</CustomButton>
             </div>
           </div>
         </div>
