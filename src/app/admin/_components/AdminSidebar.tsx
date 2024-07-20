@@ -1,7 +1,18 @@
+'use client'
+
+import { deleteCookie } from 'cookies-next'
+import { useRouter } from 'next/navigation'
 import HeaderLogo from '@/components/header/logo/header-logo'
 import SidebarLinks from '@/app/admin/_components/SidebarLinks'
+import LogoutIcon from '@/components/icons/LogoutIcon'
+import { IsLoggedlocalStorageKey } from '@/constants/auth'
 
 export default function AdminSidebar() {
+  const router = useRouter()
+  const onLogout = () => {
+    deleteCookie(IsLoggedlocalStorageKey)
+    router.push('/')
+  }
   return (
     <>
       <div
@@ -13,6 +24,11 @@ export default function AdminSidebar() {
         <nav className="flex flex-col gap-1 min-w-[240px] p-2 font-sans text-base font-normal text-gray-700">
           <SidebarLinks />
         </nav>
+        <div className="flex-grow">
+        </div>
+        <button className="flex gap-2 items-center cursor-pointer hover:text-green" onClick={onLogout}>
+          <LogoutIcon className="size-8" /><span className="text-lg">Вийти</span>
+        </button>
       </div>
     </>
   )
