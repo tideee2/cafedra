@@ -6,8 +6,9 @@ import SaveIcon from '@/components/icons/SaveIcon'
 interface Props {
   onCancel?: (x: any) => void
   onSave?: (x: any) => void
+  isDisabledSave?: boolean
 }
-export default function CreatePublicationHeader({ ...props }: Props) {
+export default function CreatePublicationHeader({ isDisabledSave = false, ...props }: Props) {
   const onSave = (x: any) => {
     if (props.onSave)
       props.onSave(x)
@@ -30,6 +31,7 @@ export default function CreatePublicationHeader({ ...props }: Props) {
           </CustomButton>
           <CustomButton
             className="flex gap-2 items-center normal-case whitespace-nowrap !p-4 !text-xl self-center"
+            disabled={isDisabledSave}
             onClick={(x: any) => onSave(x)}
             type="regular"
           ><SaveIcon className="size-6" />Створити та зберегти

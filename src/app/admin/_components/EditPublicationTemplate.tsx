@@ -16,14 +16,21 @@ import {
 import { formatDate } from '@/hooks/utils'
 import EditPublicationHeader from '@/app/admin/_components/EditPublicationHeader'
 
-export default function EditPublicationTemplate({ publication }: Partial<{ publication: SciencePublication }>) {
+interface Props {
+  publication: SciencePublication
+  onSave: (publication: SciencePublication) => void
+}
+export default function EditPublicationTemplate({ publication }: Partial<Props>) {
   const pathname = usePathname()
   const {
     register,
     handleSubmit,
     formState: {
       errors,
+      isValid,
     },
+    control,
+    watch,
   } = useForm(({
     defaultValues: {
       title: publication?.title || '',
@@ -33,6 +40,7 @@ export default function EditPublicationTemplate({ publication }: Partial<{ publi
       content: publication?.content || '',
     },
   }))
+
   const onSave = (x: any) => {
     onSubmit(x)
   }
@@ -43,7 +51,7 @@ export default function EditPublicationTemplate({ publication }: Partial<{ publi
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         {
-          pathname.includes('/science/create') ? <CreatePublicationHeader /> : <EditPublicationHeader />
+          pathname.includes('/science/create') ? <CreatePublicationHeader isDisabledSave={!isValid} /> : <EditPublicationHeader />
         }
         <div className="flex flex-col p-10 bg-white">
           <div className="w-full w-max[800px] ">
@@ -111,7 +119,7 @@ export default function EditPublicationTemplate({ publication }: Partial<{ publi
                 <div className="font-bold text-xl text-text-primary">Завантажте файл для повного ознайомлення</div>
                 <div className="text-lg text-text-primary">Необхідний формат файлу: PDF</div>
               </div>
-              <CustomButton className="flex gap-2 items-center !p-4 self-end " type="regular">
+              <CustomButton className="flex gap-2 items-center !p-4 self-end ">
                 <LoadIcon className="size-6" />
                 <span className="whitespace-nowrap">Завантажити файл</span>
               </CustomButton>
