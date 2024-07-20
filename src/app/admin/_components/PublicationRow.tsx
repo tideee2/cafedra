@@ -10,6 +10,9 @@ interface PublicationRowProps {
 const sortOrder = ['id', 'title', 'author', 'categories', 'dateStr']
 export default function PublicationRow({ publication, onEdit, onDelete }: PublicationRowProps) {
   const readyPublication = sortOrder.map((key: string) => {
+    if (key === 'categories') {
+      return publication.categories[0].category
+    }
     return String(publication[key as keyof SciencePublication])
   })
   return (

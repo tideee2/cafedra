@@ -5,23 +5,26 @@ import type { SciencePublication } from '@/interfaces/science'
 import CustomButton from '@/components/custom-button'
 import PlusIcon from '@/components/icons/PlusIcon'
 import SciencePublicationsTable from '@/app/admin/_components/SciencePublicationsTable'
+import Loader from '@/components/Loader'
+import { CONFIG } from '@/constants/config'
 
 export default function ScienceAdminPage() {
   const [data, setData] = useState<{ publications: SciencePublication[] } | null>(null)
   const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch('/api')
+    fetch(CONFIG.api.publications)
       .then(res => res.json())
       .then((data) => {
         setData(data)
         setLoading(false)
       })
       .catch(e => console.log(e))
+      .finally(() => setLoading(false))
   }, [])
+
   return (
     <>
-
       <main className="flex flex-col p-20">
         <div className="flex justify-between pb-14 whitespace-nowrap">
           <h1 className="font-black text-5xl text-update-primary">Наукова робота</h1>
@@ -33,7 +36,7 @@ export default function ScienceAdminPage() {
           </CustomButton>
         </div>
         { isLoading
-          ? <h1>Loading...</h1>
+          ? <div hidden={!isLoading}><Loader /></div>
           : <SciencePublicationsTable data={data?.publications || []} />}
       </main>
     </>

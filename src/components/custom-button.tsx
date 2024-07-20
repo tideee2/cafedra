@@ -1,9 +1,18 @@
 import type { ReactNode } from 'react'
 import Link from 'next/link'
 // todo replace type, href to props
+interface Props {
+  children: ReactNode
+  className: string
+  outlined: string
+  href: string
+  type: string
+  onClick: (x?: any) => void
+  [key: string]: string | any
+}
 export default function CustomButton(
   { children, className, type, onClick, outlined, href, ...props }:
-  Partial<{ children: ReactNode, className: string, outlined: string, href: string, type: string, onClick: (x?: any) => void }>,
+  Partial<Props>,
 ) {
   const classes = []
   if (outlined) {
@@ -30,7 +39,8 @@ export default function CustomButton(
   }
   return (
     <button
-      className={`hover:opacity-80 ${classes} ${className} py-5 px-6`}
+      {...props}
+      className={`hover:opacity-80 ${classes} ${className} py-5 px-6 disabled:cursor-not-allowed disabled:bg-gray disabled:hover:opacity-100`}
       onClick={onClick}
     >
       {children}

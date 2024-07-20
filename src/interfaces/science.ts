@@ -3,7 +3,7 @@ export interface SciencePublication {
   title: string
   content: string
   author: string
-  categories: string[]
+  categories: { id: number, category: string }[]
   date?: Date
   // todo remove later
   dateStr?: string
