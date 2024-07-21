@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 import CounterInput from '@/components/form/CounterInput'
 import CustomButton from '@/components/custom-button'
 import LoadIcon from '@/components/icons/LoadIcon'
-import type { SciencePublication } from '@/interfaces/science'
+import type { SciencePublication, SciencePublicationForSave } from '@/interfaces/science'
 import CreatePublicationHeader from '@/app/admin/_components/CreatePublicationHeader'
 import {
   authorOptions,
@@ -13,18 +13,19 @@ import {
   contentOptions,
   titleOptions,
 } from '@/app/(login-actions)/login/auth.constants'
-import { formatDate } from '@/hooks/utils'
+import { dateFormatForStore, formatDate } from '@/hooks/utils'
 import EditPublicationHeader from '@/app/admin/_components/EditPublicationHeader'
 
 interface Props {
   publication: SciencePublication
-  onSave: (publication: SciencePublication) => void
+  onSave: (publication: SciencePublicationForSave) => void
 }
-export default function EditPublicationTemplate({ publication }: Partial<Props>) {
+export default function EditPublicationTemplate({ publication, onSave }: Partial<Props>) {
   const pathname = usePathname()
   const {
     register,
     handleSubmit,
+    getValues,
     formState: {
       errors,
       isValid,
@@ -41,11 +42,18 @@ export default function EditPublicationTemplate({ publication }: Partial<Props>)
     },
   }))
 
-  const onSave = (x: any) => {
-    onSubmit(x)
-  }
-  const onSubmit = (data: any) => {
-    console.log(data)
+  const onSubmit = () => {
+    const formValue = getValues()
+    if (!formValue || !onSave) {
+      return
+    }
+    onSave({
+      content: formValue.content,
+      title: formValue.title,
+      author: formValue.author,
+      dateStr: dateFormatForStore(formValue.date),
+      categories: formValue.category.toString(),
+    })
   }
   return (
     <>

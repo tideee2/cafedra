@@ -8,3 +8,11 @@ export interface SciencePublication {
   // todo remove later
   dateStr?: string
 }
+
+export interface SciencePublicationForSave {
+  title: string
+  content: string
+  author: string
+  categories: string
+  dateStr: string
+}

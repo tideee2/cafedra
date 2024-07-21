@@ -52,6 +52,6 @@ export const contentOptions = {
   },
   pattern: {
     message: 'Назва має містити тільки дозволені символи',
-    value: /^[а-щЬЮЯЇІЄҐa-z0-9 ;:."-,\n\\]*$/gi,
+    value: /^[а-щЬЮЯЇІЄҐa-z0-9 ;\\:."\-,\n]*$/gi,
   },
 }

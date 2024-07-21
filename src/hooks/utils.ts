@@ -8,3 +8,13 @@ export function formatDate(strDate: string | undefined) {
     .reverse()
     .join('-')
 }
+
+export function dateFormatForStore(strDate: string | undefined) {
+  if (!strDate) {
+    return ''
+  }
+  return strDate
+    .split('-')
+    .reverse()
+    .join(' / ')
+}
