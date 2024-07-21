@@ -47,7 +47,7 @@ export default function SciencePublications() {
               { isLoading && !publications?.length
                 ? <div hidden={!isLoading}><Loader /></div>
                 : publications?.map((publication, index) => (
-                  <div className="p-7 bg-white flex flex-col" key={publication.id + index}>
+                  <div className="p-7 bg-white flex flex-col" key={publication.id}>
                     <h3 className="font-bold text-xl mb-5 text-update-blue">{ publication.title }</h3>
                     <div className="flex-1"></div>
                     <p

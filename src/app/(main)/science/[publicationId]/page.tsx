@@ -24,7 +24,6 @@ export default function SciencePage({ params }: Props) {
       fetch(`${CONFIG.api.publications}/${Number(params.publicationId)}`)
         .then(res => res.json())
         .then((publicationData) => {
-          console.log(publicationData)
           setPublication(publicationData)
         })
         .catch((_) => {
