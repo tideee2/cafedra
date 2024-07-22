@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import EditPublicationTemplate from '@/app/admin/_components/EditPublicationTemplate'
 import type { SciencePublication } from '@/interfaces/science'
+import { CONFIG } from '@/constants/config'
 
 interface Props {
   params: {
@@ -10,16 +11,13 @@ interface Props {
   }
 }
 export default function PublicationEditAdminPage({ params }: Props) {
-  const [data, setData] = useState<{ publications: SciencePublication[] } | null>(null)
   const [isLoading, setLoading] = useState(true)
   const [publication, setPublication] = useState<SciencePublication | undefined>(undefined)
   useEffect(() => {
-    fetch('/api')
+    fetch(`${CONFIG.api.publications}/${params.publicationId}`)
       .then(res => res.json())
-      .then((data) => {
-        setData(data)
-        const pub = data.publications.find((p: SciencePublication) => Number(p.id) === Number(params.publicationId)) || {} as SciencePublication
-        setPublication(pub)
+      .then((data: SciencePublication) => {
+        setPublication(data)
         setLoading(false)
       })
       .catch(e => console.log(e))

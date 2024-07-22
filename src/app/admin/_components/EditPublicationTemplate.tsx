@@ -55,6 +55,7 @@ export default function EditPublicationTemplate({ publication, onSave }: Partial
       categories: formValue.category.toString(),
     })
   }
+
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -89,7 +90,7 @@ export default function EditPublicationTemplate({ publication, onSave }: Partial
 
               <div>
                 <CounterInput
-                  initialValue={publication?.categories?.join('')}
+                  initialValue={publication?.categories[0].category}
                   placeholder="Введіть категорію"
                   showCounter={false}
                   title="Категорія"
