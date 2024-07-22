@@ -20,7 +20,7 @@ export default function PublicationRow({ publication, onEdit, onDelete }: Public
       <tr className="border-b border-gray-300">
         {
           readyPublication.map(value => (
-            <td className="px-6 py-4" key={value}>
+            <td className="px-4 py-4" key={value}>
               {value}
             </td>
           ))

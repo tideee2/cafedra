@@ -9,20 +9,40 @@ import Loader from '@/components/Loader'
 import { CONFIG } from '@/constants/config'
 
 export default function ScienceAdminPage() {
-  const [data, setData] = useState<{ publications: SciencePublication[] } | null>(null)
+  const [publications, setPublications] = useState<SciencePublication[]>([])
   const [isLoading, setLoading] = useState(true)
 
+  // todo add pagination for publications list
   useEffect(() => {
-    fetch(CONFIG.api.publications)
+    fetch(`${CONFIG.api.publications}?count=1000`)
       .then(res => res.json())
       .then((data) => {
-        setData(data)
+        setPublications(data?.publications || [])
         setLoading(false)
       })
       .catch(e => console.log(e))
       .finally(() => setLoading(false))
   }, [])
 
+  const onDelete = (id: number) => {
+    if (!id) {
+      return
+    }
+    setLoading(true)
+    fetch(`${CONFIG.api.publications}/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(() => {
+        const newPublications = publications.filter((p: SciencePublication) => p.id !== id)
+        setPublications(newPublications)
+        setLoading(false)
+      })
+      .catch(e => console.log(e))
+      .finally(() => setLoading(false))
+  }
   return (
     <>
       <main className="flex flex-col p-20">
@@ -37,7 +57,7 @@ export default function ScienceAdminPage() {
         </div>
         { isLoading
           ? <div hidden={!isLoading}><Loader /></div>
-          : <SciencePublicationsTable data={data?.publications || []} />}
+          : <SciencePublicationsTable data={publications || []} onDeletePublication={onDelete} />}
       </main>
     </>
   )

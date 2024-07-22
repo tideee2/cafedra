@@ -32,7 +32,11 @@ const TABLE_HEADERS = [
     key: 'actions',
   },
 ]
-export default function SciencePublicationsTable({ data }: { data: SciencePublication[] }) {
+interface Props {
+  data: SciencePublication[]
+  onDeletePublication?: (id: number) => void
+}
+export default function SciencePublicationsTable({ data, onDeletePublication }: Props) {
   const router = useRouter()
   const [showModal, setShowModal] = useState(false)
   const [deleteId, setDeleteId] = useState<number | undefined>(undefined)
@@ -47,12 +51,13 @@ export default function SciencePublicationsTable({ data }: { data: SciencePublic
   }
 
   function acceptDeleting() {
-    console.log('acceptDeleting', deleteId)
+    if (deleteId && onDeletePublication) {
+      onDeletePublication(deleteId)
+    }
     setDeleteId(undefined)
   }
 
   function cancelDeleting() {
-    console.log('cancel', deleteId)
     setDeleteId(undefined)
   }
 
@@ -91,7 +96,7 @@ export default function SciencePublicationsTable({ data }: { data: SciencePublic
             {
               data.map((publication, _id) => (
                 <PublicationRow
-                  key={_id}
+                  key={publication.id}
                   onDelete={() => deletePublication(publication.id)}
                   onEdit={() => editPublication(publication.id)}
                   publication={publication}
