@@ -18,7 +18,7 @@ import EditPublicationHeader from '@/app/admin/_components/EditPublicationHeader
 
 interface Props {
   publication: SciencePublication
-  onSave: (publication: SciencePublicationForSave) => void
+  onSave: (publication: SciencePublicationForSave, id?: number | null) => void
 }
 export default function EditPublicationTemplate({ publication, onSave }: Partial<Props>) {
   const pathname = usePathname()
@@ -36,7 +36,7 @@ export default function EditPublicationTemplate({ publication, onSave }: Partial
     defaultValues: {
       title: publication?.title || '',
       author: publication?.author || '',
-      category: publication?.categories[0] || '',
+      category: publication?.categories[0].category || '',
       date: formatDate(publication?.dateStr) || '',
       content: publication?.content || '',
     },
@@ -52,8 +52,8 @@ export default function EditPublicationTemplate({ publication, onSave }: Partial
       title: formValue.title,
       author: formValue.author,
       dateStr: dateFormatForStore(formValue.date),
-      categories: formValue.category.toString(),
-    })
+      categories: formValue.category,
+    }, publication?.id || null)
   }
 
   return (

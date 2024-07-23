@@ -1,8 +1,9 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import EditPublicationTemplate from '@/app/admin/_components/EditPublicationTemplate'
-import type { SciencePublication } from '@/interfaces/science'
+import type { SciencePublication, SciencePublicationForSave } from '@/interfaces/science'
 import { CONFIG } from '@/constants/config'
 
 interface Props {
@@ -13,6 +14,8 @@ interface Props {
 export default function PublicationEditAdminPage({ params }: Props) {
   const [isLoading, setLoading] = useState(true)
   const [publication, setPublication] = useState<SciencePublication | undefined>(undefined)
+  const router = useRouter()
+
   useEffect(() => {
     fetch(`${CONFIG.api.publications}/${params.publicationId}`)
       .then(res => res.json())
@@ -22,11 +25,35 @@ export default function PublicationEditAdminPage({ params }: Props) {
       })
       .catch(e => console.log(e))
   }, [params.publicationId])
+
+  function savePublication(data: SciencePublicationForSave, id?: number | null): void {
+    if (!data || !id) {
+      return
+    }
+    setLoading(true)
+    const { categories, ...tempData } = { ...data }
+    fetch(`${CONFIG.api.publications}/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify({
+        ...tempData,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then(() => {
+        router.push('/admin/science')
+      })
+      .catch(e => console.log(e))
+      .finally(() => setLoading(false))
+  }
+
   return (
     <>
       { isLoading
         ? <h1>Loading...</h1>
-        : <EditPublicationTemplate publication={publication} />}
+        : <EditPublicationTemplate onSave={savePublication} publication={publication} />}
     </>
   )
 }

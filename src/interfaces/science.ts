@@ -7,6 +7,7 @@ export interface SciencePublication {
   date?: Date
   // todo remove later
   dateStr?: string
+  pdfUrl?: string
 }
 
 export interface SciencePublicationForSave {
@@ -15,4 +16,5 @@ export interface SciencePublicationForSave {
   author: string
   categories: string
   dateStr: string
+  pdfUrl?: string
 }
