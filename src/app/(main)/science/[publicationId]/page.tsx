@@ -63,7 +63,7 @@ export default function SciencePage({ params }: Props) {
                       <span className="text-update-blue">{ publication?.categories[0]?.category }</span>
                     </div>
                     <div className="">
-                      <span className="text-xl font-bold mr-1.5 text-update-blue">Автор:</span>
+                      <span className="text-xl font-bold mr-1.5 text-update-blue">Дата:</span>
                       <span className="text-update-blue">{ publication?.dateStr }</span>
                     </div>
                   </div>

@@ -48,13 +48,13 @@ export default function SciencePublications() {
                 ? <div hidden={!isLoading}><Loader /></div>
                 : publications?.map((publication, index) => (
                   <div className="p-7 bg-white flex flex-col" key={publication.id}>
-                    <h3 className="font-bold text-xl mb-5 text-update-blue">{ publication.title }</h3>
+                    <h3 className="font-bold text-xl mb-5 text-update-blue">{ sliceStr(publication.title, 47) }</h3>
                     <div className="flex-1"></div>
                     <p
                       className={`text-xl mb-10 ${styles.cardTitleLine}`}
                       // @ts-expect-error todo find how fix error with custom css props
                       style={{ '--bottom-line-position': '-20px' }}
-                    >{ sliceStr(publication.content) }
+                    >{ sliceStr(publication.content, 80) }
                     </p>
                     <div className="mb-5">
                       <span className="font-bold text-xl text-update-blue">Автор:</span><br />
