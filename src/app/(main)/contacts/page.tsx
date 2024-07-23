@@ -1,11 +1,22 @@
 'use client'
 
-import { APIProvider, AdvancedMarker, InfoWindow, Map, Pin } from '@vis.gl/react-google-maps'
+import React, { useEffect, useState } from 'react'
+
 import { useForm } from 'react-hook-form'
-import { useState } from 'react'
+
+import { APIProvider, AdvancedMarker, InfoWindow, Map, Pin } from '@vis.gl/react-google-maps'
+
+import { ToastContainer, toast } from 'react-toastify'
+
+import 'react-toastify/dist/ReactToastify.css'
 
 export default function ContactPage() {
+  useEffect(() => {
+    document.documentElement.setAttribute('lang', 'ua')
+  }, [])
+
   const { register, handleSubmit, formState: { errors } } = useForm()
+
   const position = { lat: 49.83609012525825, lng: 24.01516111096321 }
   const [open, setOpen] = useState(false)
 
@@ -36,7 +47,10 @@ export default function ContactPage() {
       console.log('Ми отримали ваше повідомлення')
     })
 
-    window.location.reload()
+    toast.success('Ваше повідомлення було успішно записано !')
+    setTimeout(() => {
+      window.location.reload()
+    }, 7000)
   }
 
   return (
@@ -69,7 +83,7 @@ export default function ContactPage() {
                 <div className="basis-1/2">
                   <label>Ім`я</label><br />
                   <input
-                    className="py-2 mt-2 w-full border border-solid border-cyan-800 text-black"
+                    className="py-2 mt-2 w-full border-2 border-solid border-red-600 text-black"
                     id="user_name"
                     type="text"
                     {...register('firstName', { required: true, minLength: 2, maxLength: 50 })}
@@ -81,8 +95,9 @@ export default function ContactPage() {
                 <div className="basis-1/2 sm:ml-0 lg:ml-5">
                   <label>Електронна пошта</label><br />
                   <input
-                    className="py-2 mt-2 w-full border border-solid border-cyan-800 text-black"
+                    className="py-2 mt-2 w-full border-2 border-solid border-red-600 text-black"
                     id="user_email"
+
                     type="email"
                     {...register('Email', { required: true, minLength: 5, maxLength: 100 })}
                     onChange={onChangeHandler}
@@ -94,8 +109,9 @@ export default function ContactPage() {
               <div className="basis-full mt-5">
                 <label>Повідомлення</label><br />
                 <textarea
-                  className="w-full h-12 mt-2 border border-solid border-cyan-800 text-black"
+                  className="w-full h-12 mt-2 border-2 border-solid border-red-600  text-black"
                   id="user_message"
+
                   {...register('Message', { required: true, minLength: 10, maxLength: 2000 })}
                   onChange={onChangeHandler}
                 >
@@ -104,7 +120,9 @@ export default function ContactPage() {
               </div>
               <div>
                 <button className="bg-lime-400 p-2 mt-3 font-bold text-custom-black rounded-md place-self-start" type="submit">Надіслати</button>
+
               </div>
+              <div className="bg-yellow-400 width-20 text-xl"> <ToastContainer /></div>
 
             </form>
 
@@ -113,6 +131,7 @@ export default function ContactPage() {
         </div>
 
       </div>
+
       <div className="bg-green-200 w-full h-full">
         <APIProvider apiKey="AIzaSyC5l7qHPnzB3P79F4s1TIwUksxlcQhyDLE">
           <div className="w-full h-96">
