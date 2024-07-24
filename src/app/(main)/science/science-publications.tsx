@@ -13,30 +13,60 @@ function sliceStr(str: string, count = 100) {
   }
   return `${str.slice(0, count)}...`
 }
+interface Pagination {
+  start: number
+  perPage: number
+  count: number
+}
+interface PublicationsDataRequest {
+  publications: SciencePublication[]
+  start: number
+  count: number
+  totalCount: number
+}
 export default function SciencePublications() {
+  const initialPagination: Pagination = {
+    start: 0,
+    perPage: 6,
+    count: 0,
+  }
+
   const [publications, setPublications] = useState< SciencePublication[] | null>([])
   const [isLoading, setLoading] = useState(true)
   const [isMaxCount, setMaxCount] = useState(false)
+  const [pagination, setPagination] = useState<Pagination>(initialPagination)
 
+  const getPublications = async () => {
+    setLoading(true)
+    return fetch(`${CONFIG.api.publications}?count=${pagination.perPage}&start=${pagination.start}`)
+      .then(res => res.json())
+      .then((publicationsData) => {
+        return publicationsData
+      })
+      .then((publicationsData: PublicationsDataRequest) => {
+        const updatedPublications = [...publications || [], ...publicationsData.publications]
+        setPublications(updatedPublications)
+        setPagination({
+          ...pagination,
+          start: updatedPublications.length,
+          count: updatedPublications.length,
+        })
+        setMaxCount(publicationsData.totalCount <= updatedPublications?.length)
+      })
+      .catch((_) => {
+        setPublications([])
+      })
+      .finally(() => setLoading(false))
+  }
   useEffect(() => {
-    setTimeout(() => {
-      fetch(CONFIG.api.publications)
-        .then(res => res.json())
-        .then((publicationsData) => {
-          return publicationsData
-        })
-        .then((publicationsData) => {
-          const updatedPublications = [...publications || [], ...publicationsData.publications]
-          setPublications(updatedPublications)
-          setMaxCount(publicationsData.totalCount <= updatedPublications?.length)
-        })
-        .catch((_) => {
-          setPublications([])
-        })
-        .finally(() => setLoading(false))
-    }, 3000)
+    setTimeout(async () => {
+      await getPublications()
+    }, 30)
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
+  const onDownloadMore = async () => {
+    await getPublications()
+  }
   return (
     <>
       <div className="w-full bg-update-bg pt-5 pb-10">
@@ -68,7 +98,7 @@ export default function SciencePublications() {
             </div>
           </div>
           <div className="flex justify-center" hidden={isLoading}>
-            <CustomButton disabled={isMaxCount || isLoading} type="regular">Завантажити ще</CustomButton>
+            <CustomButton disabled={isMaxCount || isLoading} onClick={onDownloadMore} type="regular">Завантажити ще</CustomButton>
           </div>
         </div>
       </div>
