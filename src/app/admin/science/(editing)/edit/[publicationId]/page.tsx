@@ -31,7 +31,7 @@ export default function PublicationEditAdminPage({ params }: Props) {
       return
     }
     setLoading(true)
-    const { categories, filePath, file, ...tempData } = { ...data }
+    const { filePath, file, ...tempData } = { ...data }
 
     fetch(`${CONFIG.api.publications}/${id}`, {
       method: 'PUT',
