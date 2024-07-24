@@ -13,7 +13,7 @@ export const headerLinks: IHeaderLink[] = [
   },
   {
     title: 'Адміністрація',
-    href: '/administration',
+    href: '/a_dministration',
   },
   {
     title: 'Наукова робота',
