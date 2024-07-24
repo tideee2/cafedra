@@ -60,7 +60,7 @@ export default function EditPublicationTemplate({ publication, onSave }: Partial
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         {
-          pathname.includes('/science/create') ? <CreatePublicationHeader isDisabledSave={!isValid} /> : <EditPublicationHeader />
+          pathname.includes('/science/create') ? <CreatePublicationHeader isDisabledSave={!isValid} /> : <EditPublicationHeader isDisabledSave={!isValid} />
         }
         <div className="flex flex-col p-10 bg-white">
           <div className="w-full w-max[800px] ">

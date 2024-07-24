@@ -3,7 +3,16 @@ import CancelIcon from '@/components/icons/CancelIcon'
 import SaveIcon from '@/components/icons/SaveIcon'
 import EditIcon from '@/components/icons/EditIcon'
 
-export default function EditPublicationHeader() {
+interface Props {
+  onCancel?: (x: any) => void
+  onSave?: (x: any) => void
+  isDisabledSave?: boolean
+}
+export default function EditPublicationHeader({ isDisabledSave = false, ...props }: Props) {
+  const onSave = (x: any) => {
+    if (props.onSave)
+      props.onSave(x)
+  }
   return (
     <>
       <div className="flex justify-between pb-14">
@@ -22,6 +31,8 @@ export default function EditPublicationHeader() {
           </CustomButton>
           <CustomButton
             className="flex gap-2 items-center normal-case whitespace-nowrap !p-4 !text-xl self-center"
+            disabled={isDisabledSave}
+            onClick={(x: any) => onSave(x)}
             type="regular"
           ><SaveIcon className="size-6" />Зберегти зміни
           </CustomButton>
