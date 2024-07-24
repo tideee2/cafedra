@@ -31,6 +31,7 @@ export default function CustomButton(
         <Link
           className={`w-fit self-center text-center text-text-primary text-xl font-bold hover:opacity-80 py-5 px-6 ${classes} ${className}`}
           href={href || ''}
+          {...props}
         >
           { children }
         </Link>

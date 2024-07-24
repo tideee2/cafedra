@@ -30,7 +30,7 @@ export default function SciencePage({ params }: Props) {
           setPublication(null)
         })
         .finally(() => setLoading(false))
-    }, 3000)
+    }, 30)
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const publicationContent = (content: string | undefined) => {
@@ -39,6 +39,7 @@ export default function SciencePage({ params }: Props) {
       : content.split('\n')
         .map(paragraph => `<p>${paragraph}</p>`).join('')
   }
+  const disabledStyles = !publication?.pdfUrl ? 'pointer-events-none cursor-not-allowed bg-gray' : ''
   return (
     <>
       <section className="w-full py-20">
@@ -71,11 +72,19 @@ export default function SciencePage({ params }: Props) {
                     dangerouslySetInnerHTML={{ __html: publicationContent(publication?.content) }}
                   >
                   </div>
-                  <div className="flex justify-start mt-4">
-                    <CustomButton className="flex gap-1 items-center" type="regular">
-                      <DownloadIcon />
-                      <span>Завантажити увесь текст</span>
-                    </CustomButton>
+                  <div className="flex justify-start mt-8">
+                    <div className={`${!publication?.pdfUrl ? 'cursor-not-allowed bg-gray' : ''}`}>
+                      <CustomButton
+                        className={`flex gap-1 items-center ${disabledStyles}`}
+                        href={publication?.pdfUrl || '#'}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        type="regularLink"
+                      >
+                        <DownloadIcon />
+                        <span>Завантажити увесь текст</span>
+                      </CustomButton>
+                    </div>
                   </div>
                 </div>
               ) }
