@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import type { SciencePublication } from '@/interfaces/science'
 import EditIcon from '@/components/icons/EditIcon'
 import DeleteIcon from '@/components/icons/DeleteIcon'
@@ -11,17 +12,21 @@ const sortOrder = ['id', 'title', 'author', 'categories', 'dateStr']
 export default function PublicationRow({ publication, onEdit, onDelete }: PublicationRowProps) {
   const readyPublication = sortOrder.map((key: string) => {
     if (key === 'categories') {
-      return publication.categories[0].category
+      return { value: publication.categories[0].category, key }
     }
-    return String(publication[key as keyof SciencePublication])
+    return { value: String(publication[key as keyof SciencePublication]), key }
   })
   return (
     <>
       <tr className="border-b border-gray-300">
         {
-          readyPublication.map(value => (
-            <td className="px-4 py-4" key={value}>
-              {value}
+          readyPublication.map(tdValue => (
+            <td className="px-4 py-4" key={tdValue.key}>
+              {tdValue.key === 'title'
+                ? (
+                    <Link className="text-blue-800 hover:underline" href={`/admin/science/edit/${publication.id}`}>{tdValue.value}</Link>
+                  )
+                : tdValue.value}
             </td>
           ))
         }
