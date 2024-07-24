@@ -17,4 +17,6 @@ export interface SciencePublicationForSave {
   categories: string
   dateStr: string
   pdfUrl?: string
+  filePath?: Blob | string
+  file?: File | FileList | string | null
 }

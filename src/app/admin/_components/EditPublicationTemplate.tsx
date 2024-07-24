@@ -2,6 +2,8 @@
 
 import { useForm } from 'react-hook-form'
 import { usePathname } from 'next/navigation'
+import type { BaseSyntheticEvent } from 'react'
+import { useRef, useState } from 'react'
 import CounterInput from '@/components/form/CounterInput'
 import CustomButton from '@/components/custom-button'
 import LoadIcon from '@/components/icons/LoadIcon'
@@ -44,23 +46,52 @@ export default function EditPublicationTemplate({ publication, onSave }: Partial
 
   const onSubmit = () => {
     const formValue = getValues()
-    if (!formValue || !onSave) {
+    if (!formValue || !onSave || !filePath) {
       return
     }
+    const formData = new FormData()
+
+    if (fileInput?.current?.files) {
+      formData.append('uploadedFile', fileInput?.current?.files[0])
+    }
+
     onSave({
       content: formValue.content,
       title: formValue.title,
       author: formValue.author,
       dateStr: dateFormatForStore(formValue.date),
       categories: formValue.category,
+      filePath,
+      file: !!fileInput?.current?.files ? fileInput.current.files[0] : null,
     }, publication?.id || null)
   }
 
+  const [fileUrlValue, setFileUrl] = useState<string>('')
+  const [filePath, setFilePath] = useState<string>(publication?.pdfUrl || '')
+  const fileInput = useRef<HTMLInputElement | null>(null)
+  const formRef = useRef<HTMLFormElement | null>(null)
+  const onAddFile = (event: BaseSyntheticEvent) => {
+    event.preventDefault()
+    if (!fileInput.current) {
+      return
+    }
+    fileInput.current.click()
+  }
+  const onChangeFile = (event: BaseSyntheticEvent) => {
+    if (!fileInput?.current?.files?.length) {
+      return
+    }
+    const blob = new Blob([fileInput.current.files[0]], { type: 'application/pdf' })
+    setFilePath(URL.createObjectURL(blob))
+    setFileUrl(fileInput.current.value)
+  }
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} ref={formRef}>
         {
-          pathname.includes('/science/create') ? <CreatePublicationHeader isDisabledSave={!isValid} /> : <EditPublicationHeader isDisabledSave={!isValid} />
+          pathname.includes('/science/create')
+            ? <CreatePublicationHeader isDisabledSave={!isValid || !filePath} />
+            : <EditPublicationHeader isDisabledSave={!isValid || !filePath} />
         }
         <div className="flex flex-col p-10 bg-white">
           <div className="w-full w-max[800px] ">
@@ -128,10 +159,28 @@ export default function EditPublicationTemplate({ publication, onSave }: Partial
                 <div className="font-bold text-xl text-text-primary">Завантажте файл для повного ознайомлення</div>
                 <div className="text-lg text-text-primary">Необхідний формат файлу: PDF</div>
               </div>
-              <CustomButton className="flex gap-2 items-center !p-4 self-end ">
-                <LoadIcon className="size-6" />
-                <span className="whitespace-nowrap">Завантажити файл</span>
-              </CustomButton>
+              <div className="flex gap-5 items-center ">
+                <a
+                  className="text-xl text-blue-600 hover:underline"
+                  hidden={!filePath}
+                  href={filePath}
+                  target="_blank"
+                >Переглянути файл
+                </a>
+                <span className="text-xs text-red-700" hidden={!!filePath}>Файл не додано</span>
+                <input
+                  accept=".pdf"
+                  defaultValue={fileUrlValue}
+                  hidden={true}
+                  onChange={onChangeFile}
+                  ref={fileInput}
+                  type="file"
+                />
+                <CustomButton className="flex gap-2 items-center !p-4 self-end" onClick={onAddFile} type="button">
+                  <LoadIcon className="size-6" />
+                  <span className="whitespace-nowrap">Завантажити файл</span>
+                </CustomButton>
+              </div>
             </div>
           </div>
         </div>

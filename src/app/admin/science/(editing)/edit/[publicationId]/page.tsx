@@ -31,7 +31,8 @@ export default function PublicationEditAdminPage({ params }: Props) {
       return
     }
     setLoading(true)
-    const { categories, ...tempData } = { ...data }
+    const { categories, filePath, file, ...tempData } = { ...data }
+
     fetch(`${CONFIG.api.publications}/${id}`, {
       method: 'PUT',
       body: JSON.stringify({
@@ -42,6 +43,17 @@ export default function PublicationEditAdminPage({ params }: Props) {
       },
     })
       .then(res => res.json())
+      .then((res) => {
+        if (res.id && file && filePath !== res.pdfUrl) {
+          const formData = new FormData()
+          formData.set('id', res.id.toString())
+          formData.set('file', file as File)
+          return fetch(`${CONFIG.api.publications}/uploadPdf`, {
+            method: 'POST',
+            body: formData,
+          })
+        }
+      })
       .then(() => {
         router.push('/admin/science')
       })
