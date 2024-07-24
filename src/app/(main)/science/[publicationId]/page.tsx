@@ -39,7 +39,7 @@ export default function SciencePage({ params }: Props) {
       : content.split('\n')
         .map(paragraph => `<p>${paragraph}</p>`).join('')
   }
-  const disabledStyles = !publication?.pdfUrl ? 'pointer-events-none cursor-not-allowed bg-gray' : ''
+  const disabledStyles = !publication?.pdfUrl ? 'pointer-events-none cursor-not-allowed !bg-gray-300' : ''
   return (
     <>
       <section className="w-full py-20">
@@ -73,7 +73,7 @@ export default function SciencePage({ params }: Props) {
                   >
                   </div>
                   <div className="flex justify-start mt-8">
-                    <div className={`${!publication?.pdfUrl ? 'cursor-not-allowed bg-gray' : ''}`}>
+                    <div className={`${!publication?.pdfUrl ? 'cursor-not-allowed' : ''}`}>
                       <CustomButton
                         className={`flex gap-1 items-center ${disabledStyles}`}
                         href={publication?.pdfUrl || '#'}
