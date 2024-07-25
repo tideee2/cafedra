@@ -100,6 +100,7 @@ export default function EditPublicationTemplate({ publication, onSave }: Partial
                 initialValue={publication?.title}
                 maxCount={120}
                 placeholder="Введіть назву публікації"
+                showCounter={true}
                 title="Назва публікації"
                 type="regular"
                 {...register('title', titleOptions)}
