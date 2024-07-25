@@ -11,7 +11,7 @@ export default function EditingLayout({
   const pathname = usePathname()
   return (
     <>
-      <main className="flex flex-col p-20">
+      <main className="flex flex-col p-20 min-h-[calc(100vh)]">
         {children}
       </main>
     </>

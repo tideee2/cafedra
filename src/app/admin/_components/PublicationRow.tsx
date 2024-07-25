@@ -24,7 +24,7 @@ export default function PublicationRow({ publication, onEdit, onDelete }: Public
             <td className="px-4 py-4" key={tdValue.key}>
               {tdValue.key === 'title'
                 ? (
-                    <Link className="text-blue-800 hover:underline" href={`/admin/science/edit/${publication.id}`}>{tdValue.value}</Link>
+                    <Link className="text-blue-800 hover:underline" href={`/admin/science/preview/${publication.id}`}>{tdValue.value}</Link>
                   )
                 : tdValue.value}
             </td>

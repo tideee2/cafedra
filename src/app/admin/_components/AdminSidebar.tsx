@@ -17,7 +17,7 @@ export default function AdminSidebar() {
   }
   return (
     <div
-      className="relative flex flex-col bg-clip-border bg-white text-gray-700 h-[calc(100%)] w-full p-4"
+      className="relative flex flex-col bg-clip-border bg-white text-gray-700 h-[calc(100%)] min-h-[calc(100vh)] w-full p-4"
     >
       <div className="h-[calc(100vh_-_44px)] flex flex-col fixed bg-clip-border top-2 left-2">
         <div className="mb-2 p-4">
