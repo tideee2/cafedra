@@ -34,7 +34,7 @@ function getElementType(type: string | undefined) {
 }
 export type Ref = HTMLInputElement | HTMLTextAreaElement
 
-export default forwardRef<Ref, Partial<InputInterface>>(function CounterInput(
+export default forwardRef<Ref, Partial<InputInterface>>(function CustomInput(
   { id, initialValue = '', title, maxCount, type, placeholder, showCounter = true, ...props },
   ref,
 ) {
