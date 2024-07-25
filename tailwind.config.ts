@@ -42,6 +42,7 @@ const config: Config = {
         'secondary-blue2': '#D6E6FF',
         'gray-300': '#B6B9BE',
         'custom-red': '#B90000',
+        'accent-green': '#597818',
       },
     },
   },
