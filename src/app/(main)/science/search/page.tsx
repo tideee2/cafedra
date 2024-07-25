@@ -1,9 +1,10 @@
 'use client'
 
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import type { KeyboardEvent } from 'react'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
+import useOnMount from '@mui/utils/useOnMount'
 import BackArrowIcon from '@/components/icons/back-arrow'
 import type { SciencePublication } from '@/interfaces/science'
 import CustomButton from '@/components/custom-button'
@@ -18,24 +19,18 @@ export default function ScienceSearchPage() {
 
   const [publications, setPublications] = useState<SciencePublication[] | null>([])
   const [isLoading, setLoading] = useState(true)
-  const [results, setResults] = useState<SciencePublication[]>([])
   const [searchFieldValue, setSearchFieldValue] = useState<string>(search || '')
 
-  useEffect(() => {
+  useOnMount(() => {
     fetch(`${CONFIG.api.publications}/search?q=${search}`)
       .then(res => res.json())
       .then((data) => {
-        setPublications(data)
+        setPublications(data || [])
       })
       .catch(e => console.log(e))
       .finally(() => setLoading(false))
-  }, [])
+  })
 
-  useEffect(() => {
-    setResults(publications && publications.filter(p => search && p.title.includes(search)) || [])
-  }, [search, publications])
-
-  const router = useRouter()
   const searchField = useRef<HTMLInputElement | null>(null)
   const onSearch = () => {
     if (!searchField?.current?.value || searchField?.current?.value.length < 3) {
@@ -43,7 +38,7 @@ export default function ScienceSearchPage() {
     }
     // todo find the way how get new publications and change route via react way
     // router.push(`/science/search?q=${searchField?.current?.value}`)
-    setSearchFieldValue(searchField?.current?.value)
+    // setSearchFieldValue(searchField?.current?.value)
     location.href = `/science/search?q=${searchField?.current?.value}`
   }
 
@@ -60,6 +55,7 @@ export default function ScienceSearchPage() {
       onSearch()
     }
   }
+
   return (
     <>
       <section className="w-full py-20">
@@ -75,7 +71,8 @@ export default function ScienceSearchPage() {
             <div className="pt-12 pb-10 text-5xl text-update-blue">Результати пошуку</div>
           </div>
           <div className="">
-            За пошуковим запитом &quot;<b>{ search }</b>&quot; було знайдено { results.length } результат(ів).
+            За пошуковим запитом &quot;<b>{ search }</b>&quot; було
+            знайдено { publications?.length || 0 } результат(ів).
           </div>
           <div className="flex justify-center gap-5 w-full py-8">
             <input
@@ -87,13 +84,21 @@ export default function ScienceSearchPage() {
               type="text"
               value={searchFieldValue}
             />
-            <CustomButton disabled={isLoading || searchFieldValue?.length < 3} onClick={onSearch} type="regular">Шукати</CustomButton>
+            <CustomButton
+              disabled={isLoading || searchFieldValue?.length < 3}
+              onClick={onSearch}
+              type="regular"
+            >Шукати
+            </CustomButton>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7 text-text-primary my-12" hidden={!results.length}>
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7 text-text-primary my-12"
+            hidden={!publications?.length}
+          >
             { isLoading
               ? <div hidden={!isLoading}><InlineLoader /></div>
-              : (results.map(publication => (
+              : (publications && publications.map(publication => (
                   <div className="p-7 bg-white flex flex-col" key={publication.id}>
                     <h3 className="font-bold text-xl mb-5 text-update-blue">{ publication.title }</h3>
                     <p
@@ -111,7 +116,7 @@ export default function ScienceSearchPage() {
                       далі
                     </CustomButton>
                   </div>
-                )))}
+                ))) }
           </div>
         </div>
       </section>
