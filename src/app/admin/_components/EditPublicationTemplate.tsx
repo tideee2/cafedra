@@ -46,7 +46,7 @@ export default function EditPublicationTemplate({ publication, onSave }: Partial
 
   const onSubmit = () => {
     const formValue = getValues()
-    if (!formValue || !onSave || !filePath) {
+    if (!formValue || !onSave) {
       return
     }
     const formData = new FormData()
@@ -90,8 +90,8 @@ export default function EditPublicationTemplate({ publication, onSave }: Partial
       <form onSubmit={handleSubmit(onSubmit)} ref={formRef}>
         {
           pathname.includes('/science/create')
-            ? <CreatePublicationHeader isDisabledSave={!isValid || !filePath} />
-            : <EditPublicationHeader isDisabledSave={!isValid || !filePath} />
+            ? <CreatePublicationHeader isDisabledSave={!isValid} />
+            : <EditPublicationHeader isDisabledSave={!isValid} />
         }
         <div className="flex flex-col p-10 bg-white">
           <div className="w-full w-max[800px] ">
