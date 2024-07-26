@@ -17,6 +17,11 @@ const config: Config = {
       fontFamily: {
         calibri: ['Calibri', 'sans-serif'],
       },
+
+      fontSize: {
+        '9px': '9px',
+        '12px': '12px',
+      },
       backgroundSize: {
         'auto': 'auto',
         'cover': 'cover',
