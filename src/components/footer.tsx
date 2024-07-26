@@ -40,8 +40,7 @@ export default function Footer() {
           <div className="flex flex-row items-center justify-start uppercase ">
             <Image alt="Icon" height={5} priority src="/images/1.png" width={10} />
             <div className="ml-2">
-              ну львівська політехніка 1816-
-              {year}-{month}-{day} {hours}:{minutes}:{seconds}
+              ну львівська політехніка {year}-{month}-{day} {hours}:{minutes}:{seconds}
             </div>
           </div>
 
