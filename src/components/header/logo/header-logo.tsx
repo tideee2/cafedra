@@ -7,7 +7,7 @@ interface LogoProps {
   isShort: boolean
 }
 export default function HeaderLogo({ className, type, isShort }: Partial<LogoProps>) {
-  const classes = `flex flex-shrink text-green flex-grow-0 items-center hover:text-primary hover:fill-primary ${styles.logoLink}`
+  const classes = `flex flex-shrink text-accent-green flex-grow-0 items-center hover:text-green hover:fill-primary ${styles.logoLink}`
   return (
     <Link className={classes + className} href="/">
       <svg
@@ -25,7 +25,7 @@ export default function HeaderLogo({ className, type, isShort }: Partial<LogoPro
         />
       </svg>
 
-      <h1 className={`${isShort ? 'hidden' : ''}  flex pl-1 lg:pl-2 text-green font-bold uppercase text-sm lg:text-base ${type === 'sidebar' ? 'text-center' : 'min-w-40'}`}>Інформаційні<br />системи&nbsp;та<br />мережі
+      <h1 className={`${isShort ? 'hidden' : ''}  flex pl-1 lg:pl-2 hover:text-green font-bold uppercase text-sm lg:text-base ${type === 'sidebar' ? 'text-center' : 'min-w-40'}`}>Інформаційні<br />системи&nbsp;та<br />мережі
       </h1>
     </Link>
   )

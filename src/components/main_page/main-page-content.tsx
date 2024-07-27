@@ -24,21 +24,29 @@ const mainPageData = {
     },
   ],
 }
-
+function sliceStr(str: string, count = 100) {
+  if (!str?.length) {
+    return '...'
+  }
+  if (str.length < count) {
+    return str
+  }
+  return `${str.slice(0, count)}...`
+}
 export default function MainPageContent() {
   return (
     <>
       <section className="my-5 lg:my-14">
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 text-text-primary">
-          <h2 className="text-center uppercase font-bold text-green text-2xl mb-12">{mainPageData.title}</h2>
+          <h2 className="text-center uppercase font-bold text-green text-2xl mb-14">{mainPageData.title}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {
               mainPageData.items.map((item, _index) => (
-                <div className="grid gap-8 grid-rows-[256px_50px_1fr] border-b-8 border-green pb-4" key={item.id}>
+                <div className="grid gap-8 grid-rows-[156px_50px_1fr] border-b-8 border-green pb-4" key={item.id}>
                   <div className="flex justify-center items-end">
-                    <Image alt="university life" className="h-[256px] w-auto md:h-auto md:w-full" height={100} src={item.image} width={166} />
+                    <Image alt={item.title} className="w-auto md:h-auto md:w-full max-h-[153px]" height={100} src={item.image} width={166} />
                   </div>
-                  <h4 className="font-bold text-xl card-title-line text-update-blue">{item.title}</h4>
+                  <h3 className="font-bold text-xl card-title-line text-update-blue">{item.title}</h3>
                   <p className="font-medium text-lg self-stretch">{item.descriptionShort}</p>
                 </div>
               ))

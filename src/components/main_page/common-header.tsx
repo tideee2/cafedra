@@ -24,10 +24,10 @@ export default function CommonHeaderContent({ props }: { props: IHeaderInfo }) {
         >
           <div className={`flex ${textWrapperClasses}`}>
             <div className={`flex flex-col max-w-max md:max-w-[460px] ${textAlignClasses}`}>
-              <h1 className="uppercase text-3xl mb-8 text-green">{ props.title }</h1>
+              <h1 className="uppercase text-3xl mb-8 text-accent-green">{ props.title }</h1>
               {
                 props.descriptionItems.map((item, index) => (
-                  <p className="text-text-primary text-lg mb-3 last:mb-0" key={index}>{ item.text }</p>
+                  <p className="text-lg mb-3 last:mb-0" key={index}>{ item.text }</p>
                 ))
               }
             </div>
