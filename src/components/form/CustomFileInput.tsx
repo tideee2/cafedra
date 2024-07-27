@@ -8,6 +8,7 @@ interface ICustomFileInputProps {
   filePath?: string
   fileUrlValue: string
   className: string | string[]
+  fileChange: (file: File) => void
 }
 export type Ref = HTMLInputElement
 export default forwardRef<Ref, Partial<ICustomFileInputProps>>(function CustomFileInput(
@@ -17,6 +18,7 @@ export default forwardRef<Ref, Partial<ICustomFileInputProps>>(function CustomFi
     labelText = 'Зображення',
     fileUrlValue,
     className,
+    fileChange,
     ...props
   },
   ref,
@@ -29,16 +31,15 @@ export default forwardRef<Ref, Partial<ICustomFileInputProps>>(function CustomFi
   }
   const onAddFile = () => {}
   const onChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log('test')
-    console.log(e)
     if (!e.target?.files?.length) {
       return
     }
+
     setFilePath(URL.createObjectURL(e.target.files[0]))
-  }
-  const resolvePath = (path: string) => {
-    const blob = new Blob([path])
-    return URL.createObjectURL(blob)
+    if (!fileChange) {
+      return
+    }
+    fileChange(e.target.files[0])
   }
   return (
     <>
