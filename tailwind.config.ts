@@ -43,6 +43,8 @@ const config: Config = {
         'gray-300': '#B6B9BE',
         'custom-red': '#B90000',
         'accent-green': '#597818',
+        'custom-blue1': '#3a72b7',
+        'custom-gray1': '#ededed',
       },
     },
   },
