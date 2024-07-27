@@ -36,6 +36,10 @@ export default forwardRef<Ref, Partial<ICustomFileInputProps>>(function CustomFi
     }
     setFilePath(URL.createObjectURL(e.target.files[0]))
   }
+  const resolvePath = (path: string) => {
+    const blob = new Blob([path])
+    return URL.createObjectURL(blob)
+  }
   return (
     <>
       <div className="flex flex-col">
