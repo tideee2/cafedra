@@ -31,10 +31,10 @@ export default function PublicationRow({ publication, onEdit, onDelete }: Public
           ))
         }
         <td className="px-2">
-          <button className="bg-update-blue p-1 mr-1 hover:opacity-80" onClick={onEdit}>
+          <button aria-pressed="false" className="bg-update-blue p-1 mr-1 hover:opacity-80" onClick={onEdit} role="button" tabIndex={0}>
             <EditIcon className="size-4" />
           </button>
-          <button className="bg-red-300 text-red-800 p-1 hover:opacity-80" onClick={onDelete}>
+          <button aria-pressed="false" className="bg-red-300 text-red-800 p-1 hover:opacity-80" onClick={onDelete} role="button" tabIndex={0}>
             <DeleteIcon className="size-4" />
           </button>
         </td>

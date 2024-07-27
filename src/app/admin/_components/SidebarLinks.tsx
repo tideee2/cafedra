@@ -7,7 +7,7 @@ import { headerLinks } from '@/constants/header'
 
 export default function SidebarLinks() {
   const pathname = usePathname()
-  const linkStyle = 'flex items-center w-full p-3 text-start leading-tight font-medium transition-all hover:text-green focus:text-green active:text-blue-900 outline-none'
+  const linkStyle = 'flex items-center w-full p-3 text-start leading-tight font-medium transition-all hover:text-green focus:text-green active:text-blue-900'
   const isActive = (link: string, path: string) => {
     return (path.includes(`admin${link}`) && link !== '/') || (link === '/' && !path.includes(`admin${link}`))
   }
