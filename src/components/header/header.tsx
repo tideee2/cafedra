@@ -12,6 +12,9 @@ export default function Header() {
     setHeaderMenuVisible(!headerMenuVisible)
   }
 
+  const linkClick = () => {
+    setHeaderMenuVisible(false)
+  }
   return (
     <>
       <header className="w-full bg-white">
@@ -23,7 +26,7 @@ export default function Header() {
                 <div className="flex-1"></div>
                 <div className="hidden md:ml-6 md:flex items-center">
                   <div className="flex space-x-1 lg:space-x-4">
-                    <HeaderLinks />
+                    <HeaderLinks linkClick={linkClick} />
                   </div>
                 </div>
               </div>
@@ -35,7 +38,7 @@ export default function Header() {
 
           <div className="md:hidden" hidden={!headerMenuVisible} id="mobile-menu">
             <div className="space-y-1 px-2 pb-3 pt-2">
-              <HeaderLinks />
+              <HeaderLinks linkClick={linkClick} />
             </div>
           </div>
         </nav>
