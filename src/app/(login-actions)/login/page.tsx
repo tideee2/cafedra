@@ -77,8 +77,8 @@ export default function CommonScienceAdminPage() {
                     value: 4,
                   },
                   pattern: {
-                    message: 'Логін має містити англійські літери й цифри',
-                    value: /^[\w.-]*$/,
+                    message: 'Введіть валідну пошту',
+                    value: /^[\w.%+\-]+@[A-Z0-9.\-]+\.[A-Z]{2,}$/i,
                   },
                 })}
                 showCounter={false}
