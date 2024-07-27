@@ -38,24 +38,7 @@ export default function CommonScienceAdminPage() {
       .then(res => res.json())
       .then((requestData: MainPageInterface[]) => {
         setData(requestData[0])
-        return requestData[0]?.mainItems
-          .map(async (item, index) => {
-            if (!item.img.endsWith('.svg')) {
-              return null
-            }
-            const response = await fetch(item.img)
-            const blob: Blob = await response.blob()
-            const newBlob = new Blob([blob], { type: 'image/svg+xml' })
-            const objectURL = URL.createObjectURL(newBlob)
-            const items = requestData[0]?.mainItems
-            items[index].img = objectURL
-            setData({
-              ...requestData[0],
-              mainItems: items,
-            })
-          })
       })
-      .then(x => Promise.all(x))
       .catch(e => console.log(e))
       .finally(() => setLoading(false))
   }, [])
