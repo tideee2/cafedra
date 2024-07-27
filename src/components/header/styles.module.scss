@@ -2,3 +2,13 @@
   border-bottom: 2px solid #597818;
   color: #597818;
 }
+
+.speak-only {
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  font-size: 0;
+  line-height: 0;
+  text-indent: -1000px;
+}

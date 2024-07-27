@@ -24,7 +24,7 @@ export default function RootLayout({
     <html lang="uk">
       <body className={inter.className}>
         <Header />
-        <main className="flex min-h-screen flex-col bg-update-bg">
+        <main className="flex min-h-screen flex-col bg-update-bg" id="content">
           { children }
         </main>
         <Footer />

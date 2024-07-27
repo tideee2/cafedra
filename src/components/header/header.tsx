@@ -1,6 +1,8 @@
 'use client'
 
 import { useState } from 'react'
+import styles from './styles.module.scss'
+
 import HeaderLogo from '@/components/header/logo/header-logo'
 import HeaderMenuButton from '@/components/header/menu-button'
 import HeaderLinks from '@/components/header/header-links'
@@ -43,6 +45,7 @@ export default function Header() {
           </div>
         </nav>
       </header>
+      <a className={styles.speakOnly} href="#content" title="Пропустити навігацію">Пропустити навігацію</a>
     </>
   )
 }
