@@ -10,6 +10,7 @@ import CustomButton from '@/components/custom-button'
 import Loader from '@/components/Loader'
 
 import { IsLoggedlocalStorageKey } from '@/constants/auth'
+import { CONFIG } from '@/constants/config'
 
 export default function CommonScienceAdminPage() {
   const {
@@ -20,7 +21,7 @@ export default function CommonScienceAdminPage() {
     },
   } = useForm({
     defaultValues: {
-      login: '',
+      email: '',
       password: '',
     },
   })
@@ -31,25 +32,29 @@ export default function CommonScienceAdminPage() {
 
   const onSubmit = (data: any, event: any) => {
     setLoaderActive(true)
-    fetch('/api/login', {
+    fetch(CONFIG.api.loginEndpoint, {
       method: 'POST',
       body: JSON.stringify({
-        login: data.login,
+        email: data.email,
         password: data.password,
       }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     })
-      .then(res => res.json())
-      .then((res: { statusText: string, message: string }) => {
-        if (res.statusText === 'error') {
-          setCommonError(res.message || 'Логін та пароль не співпадають')
+      .then(res => res.text())
+      .then((res: string) => {
+        if (res === 'Authorization successful') {
+          setCommonError('')
+          setCookie(IsLoggedlocalStorageKey, 'true')
+          router.push('/admin/science')
           return
         }
-        setCommonError('')
-        setCookie(IsLoggedlocalStorageKey, 'true')
-        router.push('/admin/science')
+        setCommonError('Логін та пароль не співпадають')
       })
       .catch((error) => {
-        setCommonError(error?.message || 'Логін та пароль не співпадають')
+        console.log(error)
+        setCommonError('Логін та пароль не співпадають')
         deleteCookie(IsLoggedlocalStorageKey)
       })
       .finally(() => setLoaderActive(false))
@@ -68,9 +73,9 @@ export default function CommonScienceAdminPage() {
             }
             <div className="mb-10 h-[100px]">
               <CounterInput
-                id="login"
+                id="email"
                 placeholder="Введіть логін"
-                {...register('login', {
+                {...register('email', {
                   required: 'Введіть логін',
                   minLength: {
                     message: 'Логін має бути більше 4 символів',
@@ -85,7 +90,7 @@ export default function CommonScienceAdminPage() {
                 title="Логін"
                 type="regular"
               />
-              <p className="text-red-700 text-sm">{errors.login?.message}</p>
+              <p className="text-red-700 text-sm">{errors.email?.message}</p>
             </div>
 
             <div className="mb-10 h-[100px]">
