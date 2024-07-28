@@ -133,7 +133,7 @@ export default function ContactPage() {
       <div className="bg-white w-full h-full ">
         <APIProvider apiKey="AIzaSyC5l7qHPnzB3P79F4s1TIwUksxlcQhyDLE">
           <div className="w-full h-96">
-            <Map center={position} mapId="d7aa5a734b57a986" zoom={17}>
+            <Map center={position} gestureHandling="none" mapId="d7aa5a734b57a986" zoom={17}>
               <AdvancedMarker onClick={() => setOpen(true)} position={position}>
                 <Pin
                   background="red"
