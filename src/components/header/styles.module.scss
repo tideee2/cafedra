@@ -1,4 +1,14 @@
 .activeLink {
-  border-bottom: 2px solid #829e27;
-  color: #829e27;
+  border-bottom: 2px solid #597818;
+  color: #597818;
+}
+
+.speakOnly {
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  font-size: 0;
+  line-height: 0;
+  text-indent: -1000px;
 }

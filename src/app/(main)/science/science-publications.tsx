@@ -78,7 +78,7 @@ export default function SciencePublications() {
                 ? <div hidden={!isLoading}><Loader /></div>
                 : publications?.map((publication, index) => (
                   <div className="p-7 bg-white flex flex-col" key={publication.id}>
-                    <h3 className="font-bold text-xl mb-5 text-update-blue">{ sliceStr(publication.title, 47) }</h3>
+                    <h2 className="font-bold text-xl mb-5 text-update-blue">{ sliceStr(publication.title, 47) }</h2>
                     <div className="flex-1"></div>
                     <p
                       className={`text-xl mb-10 ${styles.cardTitleLine}`}

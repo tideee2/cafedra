@@ -1,9 +1,9 @@
 import type { ReactNode } from 'react'
-import React, { Suspense } from 'react'
+import React from 'react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Результати пошуку публікацій',
+  title: 'Усі публікаці факультету',
 }
 export default function SearchLayout({
   children,
@@ -12,9 +12,7 @@ export default function SearchLayout({
 }>) {
   return (
     <>
-      <Suspense>
-        { children }
-      </Suspense>
+      { children }
     </>
   )
 }

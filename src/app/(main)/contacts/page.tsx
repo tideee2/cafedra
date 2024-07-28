@@ -39,7 +39,7 @@ export default function ContactPage() {
     console.log('button is clicked')
     console.log(formData)
 
-    fetch('#', {
+    fetch('https://interteach.website/feedback', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
@@ -50,40 +50,40 @@ export default function ContactPage() {
     toast.success('Ваше повідомлення було успішно записано !')
     setTimeout(() => {
       window.location.reload()
-    }, 7000)
+    }, 6500)
   }
 
   return (
     <>
-      <div className="flex flex-column w-full bg-yellow-300 h-3/5">
-        <div className="flex flex-row flex-wrap basis-1/2  bg-slate-200 justify-center Calibri items-center">
+      <div className=" w-full bg-yellow-300 h-3/5 sm:flex flex-column flex-wrap lg:flex flex-row">
+        <div className="flex flex-row flex-wrap basis-1/2  bg-custom-gray1 justify-center Calibri items-center">
           <div className="text-lime-600 font-bold basis-2/3 text-xl mt-12 text-center">Контакти</div>
-          <div className="basis-2/3  space-y-3 text-xs mt-2 mb-6">
+          <div className="basis-2/3  space-y-3 text-xs mt-2 mb-6 font-bold">
             <div className="mt-1">
-              <div className="font-bold text-sky-700 text-sm">Адреса</div>
+              <div className=" text-custom-blue1 text-sm">Адреса</div>
               <div className="mt-1.5 tex-sm uppercase">Національний університет Львівська політехніка, вул.С.Бандери, 12, Львів, Україна</div>
             </div>
             <div>
-              <div className="font-bold text-sky-700 text-sm">Телефон</div>
+              <div className=" text-custom-blue1 text-sm">Телефон</div>
               <div className="mt-1.5 text-sm">+38 032 258-22-82</div>
             </div>
             <div>
-              <div className="font-bold text-sky-700 text-sm">Електронна пошта</div>
+              <div className=" text-custom-blue1 text-sm">Електронна пошта</div>
               <div className="mt-1.5 texts-sm uppercase">coffice@lpnu.ua</div>
             </div>
 
           </div>
 
         </div>
-        <div className="flex flex-row flex-wrap bg-blue-800 text-white basis-1/2 justify-around Calibri items-center">
+        <div className="flex flex-row flex-wrap bg-custom-blue1 text-white basis-1/2 justify-around Calibri items-center">
           <div className="font-bold basis-4/5 text-lg mt-2 text-center">Написати нам</div>
           <div className="basis-4/5 mb-3">
             <form className="flex flex-row flex-wrap text-xs basis-full" onSubmit={handleSubmit(myfunc)}>
               <div className="lg:flex flex-column basis-full sm:flex flex-row">
-                <div className="basis-1/2">
-                  <label>Ім`я</label><br />
+                <div className="basis-1/2 sm:mt-5 mb-5 lg:mt-0">
+                  <label htmlFor="user_name">Ім`я</label><br />
                   <input
-                    className="py-2 mt-2 w-full border-2 border-solid border-red-600 text-black"
+                    className="p-2 mt-2 w-full border-none text-black focus:border-solid border-2 border-red-600 outline-none"
                     id="user_name"
                     type="text"
                     {...register('firstName', { required: true, minLength: 2, maxLength: 50 })}
@@ -92,12 +92,11 @@ export default function ContactPage() {
                   {errors.firstName && <p className="text-lime-200 mt-1">Ім`я має містити від 2 до 50 символів</p>}
                 </div>
 
-                <div className="basis-1/2 sm:ml-0 lg:ml-5">
-                  <label>Електронна пошта</label><br />
+                <div className="basis-1/2 sm:ml-0 lg:ml-5 mt-0">
+                  <label htmlFor="user_email">Електронна пошта</label><br />
                   <input
-                    className="py-2 mt-2 w-full border-2 border-solid border-red-600 text-black"
+                    className="p-2 mt-2 w-full border-none text-black focus:border-solid border-2 border-red-600 outline-none"
                     id="user_email"
-
                     type="email"
                     {...register('Email', { required: true, minLength: 5, maxLength: 100 })}
                     onChange={onChangeHandler}
@@ -107,11 +106,10 @@ export default function ContactPage() {
 
               </div>
               <div className="basis-full mt-5">
-                <label>Повідомлення</label><br />
+                <label htmlFor="user_message">Повідомлення</label><br />
                 <textarea
-                  className="w-full h-12 mt-2 border-2 border-solid border-red-600  text-black"
+                  className="w-full h-12 mt-2 p-1 border-none  text-black focus:border-solid border-2 border-red-600 outline-none"
                   id="user_message"
-
                   {...register('Message', { required: true, minLength: 10, maxLength: 2000 })}
                   onChange={onChangeHandler}
                 >

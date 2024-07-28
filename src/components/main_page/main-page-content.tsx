@@ -25,6 +25,16 @@ const mainPageData = {
     },
   ],
 }
+function sliceStr(str: string, count = 100) {
+  if (!str?.length) {
+    return '...'
+  }
+  if (str.length < count) {
+    return str
+  }
+  return `${str.slice(0, count)}...`
+}
+export default function MainPageContent() {
 
 interface Props {
   mainPageContent?: MainPageContentInterface | null
@@ -35,13 +45,13 @@ export default function MainPageContent({ mainPageContent }: Props) {
     <>
       <section className="my-5 lg:my-14">
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 text-text-primary">
-          <h2 className="text-center uppercase font-bold text-green text-2xl mb-12">{mainPageContent?.sectionTitle}</h2>
+          <h2 className="text-center uppercase font-bold text-green text-2xl mb-14">{mainPageContent?.sectionTitle}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {
               mainPageContent?.mainItems.map((item, _index) => (
-                <div className="grid gap-8 grid-rows-[256px_50px_1fr] border-b-8 border-green pb-4" key={item.id}>
+                <div className="grid gap-8 grid-rows-[156px_50px_1fr] border-b-8 border-green pb-4" key={item.id}>
                   <div className="flex justify-center items-end">
-                    <Image alt="university life" className="h-[256px] w-auto md:h-auto md:w-full" height={100} src={item.img} width={166} />
+                    <Image alt={item.title} className="max-h-[153px] w-auto md:h-auto md:w-full" height={100} src={item.img} width={166} />
                   </div>
                   <h4 className="font-bold text-xl card-title-line text-update-blue">{item.itemTitle}</h4>
                   <p className="font-medium text-lg self-stretch">{item.text}</p>

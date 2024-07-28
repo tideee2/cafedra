@@ -2,7 +2,7 @@
 
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import type { KeyboardEvent } from 'react'
+import type { ChangeEvent, KeyboardEvent } from 'react'
 import { useRef, useState } from 'react'
 import useOnMount from '@mui/utils/useOnMount'
 import BackArrowIcon from '@/components/icons/back-arrow'
@@ -20,6 +20,7 @@ export default function ScienceSearchPage() {
   const [publications, setPublications] = useState<SciencePublication[] | null>([])
   const [isLoading, setLoading] = useState(true)
   const [searchFieldValue, setSearchFieldValue] = useState<string>(search || '')
+  const [isTouched, setIsTouched] = useState<boolean>(false)
 
   useOnMount(() => {
     fetch(`${CONFIG.api.publications}/search?q=${search}`)
@@ -56,17 +57,23 @@ export default function ScienceSearchPage() {
     }
   }
 
+  const onChangeSearchField = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchFieldValue(event.target.value)
+    setIsTouched(true)
+  }
   return (
     <>
       <section className="w-full py-20">
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-          <Link
-            className="text-secondary-blue flex gap-3 items-center text-opacity-80 hover:text-opacity-100"
-            href="/science"
-          >
-            <BackArrowIcon />
-            <span className="text-xl font-bold">До списку публікацій</span>
-          </Link>
+          <div className="flex">
+            <Link
+              className="text-secondary-blue flex gap-3 items-center text-opacity-80 hover:text-opacity-100"
+              href="/science"
+            >
+              <BackArrowIcon />
+              <span className="text-xl font-bold">До списку публікацій</span>
+            </Link>
+          </div>
           <div className="flex flex-col w-4/5 text-text-primary pb-5 mb-4">
             <div className="pt-12 pb-10 text-5xl text-update-blue">Результати пошуку</div>
           </div>
@@ -75,9 +82,11 @@ export default function ScienceSearchPage() {
             знайдено { publications?.length || 0 } результат(ів).
           </div>
           <div className="flex justify-center gap-5 w-full py-8">
+            <label hidden={true} htmlFor="search_field">Введіть назву або ключове слово</label>
             <input
               className="flex-1 py-5 px-6 w-full lg:min-w-[400px] placeholder-gray placeholde:font-normal text-lg font-bold text-text-primary"
-              onChange={e => setSearchFieldValue(e.target.value)}
+              id="search_field"
+              onChange={onChangeSearchField}
               onKeyDown={keyDown}
               placeholder="Введіть назву або ключове слово"
               ref={searchField}
@@ -85,7 +94,7 @@ export default function ScienceSearchPage() {
               value={searchFieldValue}
             />
             <CustomButton
-              disabled={isLoading || searchFieldValue?.length < 3}
+              disabled={isLoading || searchFieldValue?.length < 3 || !isTouched}
               onClick={onSearch}
               type="regular"
             >Шукати

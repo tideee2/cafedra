@@ -1,6 +1,3 @@
-// todo get this data from server
-'use client'
-
 import CommonHeaderContent from '@/components/main_page/common-header'
 import { sciencePageHeaderInfo } from '@/constants/header'
 import ScienceMainPage from '@/app/(main)/science/science-main-page'
