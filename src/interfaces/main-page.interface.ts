@@ -18,3 +18,12 @@ export type RequestMainPageItem = IMainPageItem | {
 export type RequestMainPageInterface = MainPageInterface | {
   img: File
 }
+export interface MainPageHeaderInterface {
+  title: string
+  img: string
+  subTitle: string
+}
+export interface MainPageContentInterface {
+  sectionTitle: string
+  mainItems: IMainPageItem[]
+}
