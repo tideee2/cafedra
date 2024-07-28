@@ -56,7 +56,7 @@ export default function ContactPage() {
   return (
     <>
       <div className=" w-full bg-yellow-300 h-3/5 sm:flex flex-column flex-wrap lg:flex flex-row">
-        <div className="flex flex-row flex-wrap basis-1/2  bg-custom-gray1 justify-center Calibri items-center">
+        <div className="flex flex-row flex-wrap basis-1/2  bg-custom-gray1 justify-center Calibri items-center h-96">
           <div className="text-lime-600 font-bold basis-2/3 text-xl mt-12 text-center">Контакти</div>
           <div className="basis-2/3  space-y-3 text-xs mt-2 mb-6 font-bold">
             <div className="mt-1">
@@ -130,7 +130,7 @@ export default function ContactPage() {
 
       </div>
 
-      <div className="bg-green-200 w-full h-full">
+      <div className="bg-white w-full h-full ">
         <APIProvider apiKey="AIzaSyC5l7qHPnzB3P79F4s1TIwUksxlcQhyDLE">
           <div className="w-full h-96">
             <Map center={position} mapId="d7aa5a734b57a986" zoom={17}>
