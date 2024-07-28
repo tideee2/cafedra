@@ -80,7 +80,7 @@ export default function ContactPage() {
           <div className="basis-4/5 mb-3">
             <form className="flex flex-row flex-wrap text-xs basis-full" onSubmit={handleSubmit(myfunc)}>
               <div className="lg:flex flex-column basis-full sm:flex flex-row">
-                <div className="basis-1/2 sm:mt-5 mb-5 lg:mt-0">
+                <div className="basis-1/2 sm:mt-5 mb-5 lg:mt-5">
                   <label htmlFor="user_name">Ім`я</label><br />
                   <input
                     className="p-2 mt-2 w-full border-none text-black focus:border-solid border-2 border-red-600 outline-none"
@@ -92,7 +92,7 @@ export default function ContactPage() {
                   {errors.firstName && <p className="text-lime-200 mt-1">Ім`я має містити від 2 до 50 символів</p>}
                 </div>
 
-                <div className="basis-1/2 sm:ml-0 lg:ml-5 mt-0">
+                <div className="basis-1/2 sm:ml-0 md:ml-2 mt-5 lg:m-5">
                   <label htmlFor="user_email">Електронна пошта</label><br />
                   <input
                     className="p-2 mt-2 w-full border-none text-black focus:border-solid border-2 border-red-600 outline-none"
