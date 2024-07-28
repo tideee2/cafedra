@@ -29,41 +29,26 @@ export default function AdministrationPage() {
             isLoading
               ? <h1>Loading...</h1>
               : (
-                  <table>
-                    <tr className="text-left">
-                      <th className="p-4">
-                        №
-                      </th>
-                      <th className="p-4">
-                        ПІБ
-                      </th>
-                      <th className="p-4">
-                        Науковий рівень
-                      </th>
-                      <th className="p-4">
-                        Вчене звання
-                      </th>
-                    </tr>
-                    {
-                      members.map((member: AdministrationItem) => (
-                        <tr className="" key={member.id}>
-                          <td className="p-4">
-                            { member.id }
-                          </td>
-                          <td className="text-update-blue hover:opacity-80 hover:underline p-4">
-                            <Link href={`/a_dministration/${member.id}`} title={member.pib}>{ member.pib }</Link>
-                          </td>
-                          <td className="p-4">
-                            { member.scientificLevel }
-                          </td>
-                          <td className="p-4">
-                            { member.academicLevel }
-                          </td>
-                        </tr>
-                      ))
-                    }
-
-                  </table>
+                  <>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                      {
+                        members.map((member: AdministrationItem) => (
+                          <div className="flex flex-col text-center border-accent-green text-update-blue hover:opacity-80 hover:underline ">
+                            <Link className="flex flex-col gap-3 p-4" href={`/a_dministration/${member.id}`} title={member.pib}>
+                              <img
+                                alt={member.pib}
+                                className="w-full h-[200px]"
+                                height={100}
+                                src={member.photo}
+                                width={100}
+                              />
+                              { member.pib }
+                            </Link>
+                          </div>
+                        ))
+                      }
+                    </div>
+                  </>
                 )
           }
         </div>
