@@ -44,12 +44,15 @@ export default function CommonScienceAdminPage() {
     fetch(`${CONFIG.api.mainPage}`)
       .then(res => res.json())
       .then((requestData: MainPageInterface[]) => {
-        setData(requestData[0])
+        setData({
+          ...requestData[0],
+          mainItems: requestData[0].mainItems.slice(0, 3),
+        })
         setValue('title', requestData[0].title)
         setValue('subTitle', requestData[0].subTitle)
         setValue('sectionTitle', requestData[0].sectionTitle)
         setValue('img', requestData[0].img)
-        setValue('mainItems', requestData[0].mainItems)
+        setValue('mainItems', requestData[0].mainItems.slice(0, 3))
       })
       .catch(e => console.log(e))
       .finally(() => setLoading(false))
@@ -68,17 +71,20 @@ export default function CommonScienceAdminPage() {
       subTitle: formValue.subTitle,
       sectionTitle: formValue.sectionTitle,
       mainItems: data?.mainItems.map(item => ({
+        id: item.id,
         itemTitle: item.itemTitle,
         text: item.text,
       })),
     }))
 
-    if (!images?.img && !!data?.img) {
-      const response = await fetch(data.img)
-      const dataBlob = await response.blob()
-      const imgFile = new File([dataBlob], data.img)
-    }
+    console.log(images)
     if (images) {
+      if (images.img) {
+        formData.set('img', images.img)
+      }
+      else {
+        formData.append('img', new File([], ''))
+      }
       const mainItemsImages = Object.entries(images).map(([key, value]) => {
         if (key === 'img') {
           return null
@@ -87,21 +93,28 @@ export default function CommonScienceAdminPage() {
         return value as File
       }).filter(Boolean)
 
-      mainItemsImages.forEach((image) => {
-        if (image) {
-          formData.append('mainItemImgs[]', image)
-        }
-      })
-      formData.set('img', images.img)
+      if (mainItemsImages?.length) {
+        mainItemsImages.forEach((image) => {
+          if (image) {
+            formData.append('mainItemImgs[]', image)
+          }
+        })
+      }
+      else {
+        formData.append('mainItemImgs', new File([], ''))
+      }
+    }
+    else {
+      formData.append('img', new File([], ''))
+      formData.append('mainItemImgs', new File([], ''))
     }
 
     fetch(`${CONFIG.api.mainPage}`, {
-      method: 'POST',
+      method: 'PUT',
       body: formData,
     })
       .then(res => res.json())
       .then((requestData: MainPageInterface[]) => {
-        setData(requestData[0])
       })
   }
 
@@ -125,7 +138,6 @@ export default function CommonScienceAdminPage() {
             ? <h1>Loading...</h1>
             : (
                 <form className="flex flex-col gap-5">
-                  { data?.title }
                   <p className="text-xs text-red-700">{ errors?.title?.message }</p>
                   <CustomInput
                     className="!p-3 normal-case"

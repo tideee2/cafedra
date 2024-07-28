@@ -10,7 +10,8 @@ export const titleOptions = {
   },
   pattern: {
     message: 'Назва має містити тільки дозволені символи',
-    value: /^[а-щЬЮЯЇІЄҐa-z0-9 ;:."-,]*$/gi,
+    // eslint-disable-next-line regexp/no-obscure-range
+    value: /^[а-щЬЮЯЇІЄҐa-z0-9 ;:.\-"-,]*$/gi,
   },
 }
 

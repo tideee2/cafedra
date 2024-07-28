@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import type { MainPageContentInterface } from '@/interfaces/main-page.interface'
 
 interface Props {
@@ -16,7 +15,7 @@ export default function MainPageContent({ mainPageContent }: Props) {
               mainPageContent?.mainItems.map((item, _index) => (
                 <div className="grid gap-8 grid-rows-[156px_50px_1fr] border-b-8 border-green pb-4" key={item.id}>
                   <div className="flex justify-center items-end">
-                    <Image alt={item.itemTitle} className="max-h-[153px] w-auto md:h-auto md:w-full" height={100} src={item.img} width={166} />
+                    <img alt={item.itemTitle} className="max-h-[153px] w-auto md:h-auto md:w-full" height={100} src={item.img} width={166} />
                   </div>
                   <h3 className="font-bold text-xl card-title-line text-update-blue">{item.itemTitle}</h3>
                   <p className="font-medium text-lg self-stretch">{item.text}</p>

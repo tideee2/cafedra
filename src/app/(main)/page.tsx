@@ -19,6 +19,7 @@ export default function Home() {
     fetch(`${CONFIG.api.mainPage}`)
       .then(res => res.json())
       .then((data: MainPageInterface[]) => {
+        console.log('==', data)
         if (!data?.length) {
           return
         }
@@ -34,7 +35,7 @@ export default function Home() {
         })
         console.log(data)
         setPageContent({
-          mainItems: data[0]?.mainItems || [],
+          mainItems: data[0]?.mainItems?.slice(0, 3) || [],
           sectionTitle: data[0]?.sectionTitle || '',
         })
       })

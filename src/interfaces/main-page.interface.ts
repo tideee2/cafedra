@@ -1,4 +1,5 @@
 export interface MainPageInterface {
+  id: number
   title: string
   img: string
   name: string

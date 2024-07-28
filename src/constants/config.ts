@@ -6,5 +6,6 @@ export const CONFIG = {
     mainPage: `${process.env.NEXT_PUBLIC_REMOTE_SERVER_URL}/main-info`,
     sciencePage: `${process.env.NEXT_PUBLIC_REMOTE_SERVER_URL}/page-info/science`,
     loginEndpoint: `${process.env.NEXT_PUBLIC_REMOTE_SERVER_URL}/auth/login`,
+    administration: `${process.env.NEXT_PUBLIC_REMOTE_SERVER_URL}/administration`,
   },
 }
