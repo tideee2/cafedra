@@ -2,44 +2,41 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import EditPublicationTemplate from '@/app/admin/_components/EditPublicationTemplate'
-import type { SciencePublicationForSave } from '@/interfaces/science'
 import { CONFIG } from '@/constants/config'
 import Loader from '@/components/Loader'
+import type { AdministrationItemForSave } from '@/interfaces/administration-item'
+import EditMemberTemplate from '@/app/admin/_components/EditMemberTemplate'
 
 // todo need to add popup messages about success / error creating
-export default function ScienceAdminPageCreate() {
+export default function MemberCreatePage() {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
 
-  function savePublication(publication: SciencePublicationForSave): void {
-    if (!publication) {
+  function saveMember(memberItem: AdministrationItemForSave): void {
+    if (!memberItem) {
       return
     }
     setIsLoading(true)
-    const { filePath, file, ...publicationData } = { ...publication }
+    const { filePath, file, ...memberData } = { ...memberItem }
 
-    fetch(`${CONFIG.api.publications}/add`, {
+    const formData = new FormData()
+    formData.set('data', JSON.stringify(memberData))
+    if (file) {
+      formData.set('img', file as File)
+    }
+    else {
+      formData.set('img', new File([], ''))
+    }
+    fetch(`${CONFIG.api.administration}`, {
       method: 'POST',
-      body: JSON.stringify(publicationData),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      body: formData,
     })
       .then(res => res.json())
       .then((res) => {
-        if (res.id && file && filePath !== res.pdfUrl) {
-          const formData = new FormData()
-          formData.set('id', res.id.toString())
-          formData.set('file', file as File)
-          return fetch(`${CONFIG.api.publications}/uploadPdf`, {
-            method: 'POST',
-            body: formData,
-          })
-        }
+        console.log(res)
       })
       .then(() => {
-        router.push('/admin/science')
+        router.push('/admin/a_dministration')
       })
       .catch(e => console.log(e))
       .finally(() => setIsLoading(false))
@@ -48,7 +45,7 @@ export default function ScienceAdminPageCreate() {
     <>
       { isLoading
         ? <div className="relative" hidden={!isLoading}><Loader /></div>
-        : <EditPublicationTemplate onSave={savePublication} />}
+        : <EditMemberTemplate onSave={saveMember} />}
     </>
   )
 }

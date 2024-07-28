@@ -45,6 +45,7 @@ export default function EditMemberTemplate({ memberItem, onSave }: Partial<Props
       publications: memberItem?.publications || '',
       schedule: memberItem?.schedule || '',
     },
+    mode: 'onTouched',
   }))
 
   const onSubmit = () => {
@@ -82,6 +83,9 @@ export default function EditMemberTemplate({ memberItem, onSave }: Partial<Props
     // todo fix ts error with never type
     setValue('photo', 'filed' as never)
     setFileImage(file)
+  }
+  const test = () => {
+    console.log({ ...errors })
   }
   return (
     <>
