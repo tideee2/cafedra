@@ -1,87 +1,116 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useForm } from 'react-hook-form'
+import CustomButton from '@/components/custom-button'
+import { CONFIG } from '@/constants/config'
+import type { ContactInterface } from '@/interfaces/contact-interfaces'
+import CustomInput from '@/components/form/CustomInput'
+import { commonOptions } from '@/app/(login-actions)/login/auth.constants'
+import type { MainPageInterface } from '@/interfaces/main-page.interface'
 
 export default function ContactPage() {
-  const { register, handleSubmit, formState: { errors } } = useForm()
+  const [isLoading, setLoading] = useState(true)
+  const [data, setData] = useState<ContactInterface | null>(null)
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: {
+      errors,
+    },
+    control,
+    watch,
+    setValue,
+  } = useForm(({
+    defaultValues: {
+      address: data?.address || '',
+      tel: data?.tel || '',
+      email: data?.email || '',
+      apiKey: data?.apiKey || '',
+      mapId: data?.mapId || '',
+    },
+  }))
 
-  const myfunc = () => {
-    console.log('button is clicked')
+  useEffect(() => {
+    setLoading(true)
+    fetch(`${CONFIG.api.contacts}`)
+      .then(res => res.json())
+      .then((requestData: ContactInterface[]) => {
+        console.log(requestData)
+        setData(requestData[0])
+        setValue('address', requestData[0].address)
+        setValue('tel', requestData[0].tel)
+        setValue('email', requestData[0].email)
+        setValue('apiKey', requestData[0].apiKey)
+        setValue('mapId', requestData[0].mapId)
+      })
+      .catch(e => console.log(e))
+      .finally(() => setLoading(false))
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  const onSave = async () => {
+    const formValue = getValues()
+    if (!formValue || !onSave) {
+      return
+    }
+
+    fetch(`${CONFIG.api.contacts}/${data?.id || 0}`, {
+      method: 'PUT',
+      body: JSON.stringify({
+        address: formValue.address,
+        tel: formValue.tel,
+        email: formValue.email,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then((requestData: MainPageInterface[]) => {
+        console.log(requestData)
+      })
   }
-
   return (
     <>
-      <div className="flex flex-column w-full bg-yellow-300 h-72">
-        <div className="flex flex-row flex-wrap basis-1/2  bg-white justify-center Calibri items-center">
-          <div className="text-blue-900  font-bold basis-2/3 text-xl mt-3">Контакти</div>
-          <div className="basis-2/3  space-y-4 text-xs mb-12">
-            <div className="mt-1">
-              <div className="font-bold text-blue-950">Адреса</div>
-              <div className="mt-1.5">Національний університет Львівська політехніка, вул.С.Бандери, 12, Львів, Україна</div>
-            </div>
-            <div>
-              <div className="font-bold text-blue-950">Телефон</div>
-              <div className="mt-1.5">+38 032 258-22-82</div>
-            </div>
-            <div>
-              <div className="font-bold text-blue-950">Електронна пошта</div>
-              <div className="mt-1.5">coffice@lpnu.ua</div>
-            </div>
-
-          </div>
-
+      <main className="flex flex-col p-20">
+        <div className="flex justify-between pb-14 whitespace-nowrap">
+          <h1 className="font-black text-5xl text-update-primary">Сторінка контактів</h1>
+          <CustomButton onClick={onSave}>Зберігти</CustomButton>
         </div>
-        <div className="flex flex-row flex-wrap bg-blue-100 basis-1/2 justify-around Calibri items-center">
-          <div className="text-blue-900  font-bold basis-4/5 text-lg mt-3">Написати нам</div>
-          <div className="basis-4/5 mb-3">
-            <form className="flex flex-row flex-wrap text-xs basis-full" onSubmit={handleSubmit(myfunc)}>
-              <div className="flex flex-column basis-full">
-                <div className="basis-1/2">
-                  <label>Name</label><br />
-                  <input
-
-                    className="py-2 mt-2 w-full border border-solid border-cyan-800"
-                    id="user_name"
-                    type="text"
-                    {...register('firstName', { required: true, minLength: 2, maxLength: 50 })}
+        <div className="bg-white p-6 text-sm">
+          { isLoading
+            ? <h1>Loading...</h1>
+            : (
+                <form className="flex flex-col gap-5">
+                  <CustomInput
+                    className="!p-3 normal-case"
+                    initialValue={data?.address}
+                    placeholder="Введіть адресу університету"
+                    title="Адреса університету"
+                    type="regular"
+                    {...register('address', commonOptions('Адреса університету'))}
                   />
-                  {errors.firstName && <p className="text-red-700 font-bold">Name must contains from 2 to 50 symbols</p>}
-                </div>
-
-                <div className="basis-1/2 ml-5">
-                  <label>Електронна пошта</label><br />
-                  <input
-                    className="py-2 mt-2 w-full border border-solid border-cyan-800"
-                    id="user_email"
-                    type="email"
-                    {...register('Email', { required: true, minLength: 5, maxLength: 100 })}
+                  <CustomInput
+                    className="!p-3 normal-case"
+                    initialValue={data?.tel}
+                    placeholder="Введіть телефон університету"
+                    title="Телефон університету"
+                    type="regular"
+                    {...register('tel', commonOptions('Телефон університету'))}
                   />
-                  {errors.Email && <p className="text-red-700 font-bold">Email must contains from 5 to 100 symbols</p>}
-                </div>
-
-              </div>
-              <div className="basis-full mt-5">
-                <label>Повідомлення</label><br />
-                <textarea
-                  className="w-full h-12 mt-2 border border-solid border-cyan-800"
-                  id="user_message"
-                  {...register('Message', { required: true, minLength: 10, maxLength: 2000 })}
-                >
-                </textarea>
-                {errors.Message && <p className="text-red-700 font-bold">Message must contains from 10 to 2000 symbols</p>}
-              </div>
-
-              <button className="bg-yellow-400 p-2 mt-3 font-bold" type="submit">Надіслати</button>
-            </form>
-
-          </div>
-
+                  <CustomInput
+                    className="!p-3 normal-case"
+                    initialValue={data?.email}
+                    placeholder="Введіть email університету"
+                    title="Email університету"
+                    type="regular"
+                    {...register('email', commonOptions('Email університету'))}
+                  />
+                </form>
+              )}
         </div>
-
-      </div>
-
+      </main>
     </>
   )
 }

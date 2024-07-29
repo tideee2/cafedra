@@ -9,6 +9,9 @@ import { APIProvider, AdvancedMarker, InfoWindow, Map, Pin } from '@vis.gl/react
 import { ToastContainer, toast } from 'react-toastify'
 
 import 'react-toastify/dist/ReactToastify.css'
+import { CONFIG } from '@/constants/config'
+import type { ContactInterface } from '@/interfaces/contact-interfaces'
+import InlineLoader from '@/components/InlineLoader'
 
 export default function ContactPage() {
   useEffect(() => {
@@ -19,6 +22,8 @@ export default function ContactPage() {
 
   const position = { lat: 49.83609012525825, lng: 24.01516111096321 }
   const [open, setOpen] = useState(false)
+  const [isLoading, setLoading] = useState(true)
+  const [data, setData] = useState<ContactInterface | null>(null)
 
   const [formData, setFormData] = useState({
     name: '',
@@ -53,29 +58,51 @@ export default function ContactPage() {
     }, 6500)
   }
 
+  useEffect(() => {
+    setLoading(true)
+    fetch(`${CONFIG.api.contacts}`)
+      .then(res => res.json())
+      .then((requestData: ContactInterface[]) => {
+        console.log(requestData)
+        setData(requestData[0])
+      })
+      .catch(e => console.log(e))
+      .finally(() => setLoading(false))
+  }, [])
+
   return (
     <>
       <div className=" w-full bg-yellow-300 h-3/5 sm:flex flex-column flex-wrap lg:flex flex-row">
         <div className="flex flex-row flex-wrap basis-1/2  bg-custom-gray1 justify-center Calibri items-center">
           <div className="text-lime-600 font-bold basis-2/3 text-xl mt-12 text-center">Контакти</div>
           <div className="basis-2/3  space-y-3 text-xs mt-2 mb-6 font-bold">
-            <div className="mt-1">
-              <div className=" text-custom-blue1 text-sm">Адреса</div>
-              <div className="mt-1.5 tex-sm uppercase">Національний університет Львівська політехніка, вул.С.Бандери, 12, Львів, Україна</div>
-            </div>
-            <div>
-              <div className=" text-custom-blue1 text-sm">Телефон</div>
-              <div className="mt-1.5 text-sm">+38 032 258-22-82</div>
-            </div>
-            <div>
-              <div className=" text-custom-blue1 text-sm">Електронна пошта</div>
-              <div className="mt-1.5 texts-sm uppercase">coffice@lpnu.ua</div>
-            </div>
+            {
+              isLoading
+                ? <InlineLoader />
+                : (
+                    <>
+                      <div className="mt-1">
+                        <div className=" text-custom-blue1 text-sm">Адреса</div>
+                        <div className="mt-1.5 tex-sm uppercase">{ data?.address }</div>
+                      </div>
+                      <div>
+                        <div className=" text-custom-blue1 text-sm">Телефон</div>
+                        <div className="mt-1.5 text-sm">{ data?.tel }</div>
+                      </div>
+                      <div>
+                        <div className=" text-custom-blue1 text-sm">Електронна пошта</div>
+                        <div className="mt-1.5 texts-sm uppercase">{ data?.tel }</div>
+                      </div>
+                    </>
+                  )
+            }
 
           </div>
 
         </div>
-        <div className="flex flex-row flex-wrap bg-custom-blue1 text-white basis-1/2 justify-around Calibri items-center">
+        <div
+          className="flex flex-row flex-wrap bg-custom-blue1 text-white basis-1/2 justify-around Calibri items-center"
+        >
           <div className="font-bold basis-4/5 text-lg mt-2 text-center">Написати нам</div>
           <div className="basis-4/5 mb-3">
             <form className="flex flex-row flex-wrap text-xs basis-full" onSubmit={handleSubmit(myfunc)}>
@@ -133,7 +160,7 @@ export default function ContactPage() {
       <div className="bg-green-200 w-full h-full">
         <APIProvider apiKey="AIzaSyC5l7qHPnzB3P79F4s1TIwUksxlcQhyDLE">
           <div className="w-full h-96">
-          <Map center={position} gestureHandling="none" mapId="d7aa5a734b57a986" zoom={17}>
+            <Map center={position} gestureHandling="none" mapId="d7aa5a734b57a986" zoom={17}>
               <AdvancedMarker onClick={() => setOpen(true)} position={position}>
                 <Pin
                   background="red"

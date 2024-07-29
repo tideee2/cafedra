@@ -8,5 +8,6 @@ export const CONFIG = {
     loginEndpoint: `${process.env.NEXT_PUBLIC_REMOTE_SERVER_URL}/auth/login`,
     administration: `${process.env.NEXT_PUBLIC_REMOTE_SERVER_URL}/administration`,
     news: `${process.env.NEXT_PUBLIC_REMOTE_SERVER_URL}/blog`,
+    contacts: `${process.env.NEXT_PUBLIC_REMOTE_SERVER_URL}/contacts`,
   },
 }
