@@ -9,15 +9,19 @@ interface LogoProps {
 export default function HeaderLogo({ className, type, isShort }: Partial<LogoProps>) {
   const classes = `flex flex-shrink text-accent-green flex-grow-0 items-center hover:text-green hover:fill-primary ${styles.logoLink}`
   return (
-    <Link className={classes + className} href="/">
+    <Link className={classes + className} href="/" target="cafedra link">
       <svg
         className="w-20 h-full text-white"
         height="115"
         viewBox="0 0 183 115"
         width="183"
         xmlns="http://www.w3.org/2000/svg"
+          // @ts-ignore
+        alt="cafedra logo"
       >
         <image
+          // @ts-expect-error todo change to image
+          alt="cafedra logo"
           height="115"
           id="icm_logo"
           width="183"

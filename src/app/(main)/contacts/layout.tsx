@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: 'Контакти',
   openGraph: {
     title: 'Контакти',
+    locale: 'ua',
   },
 }
 export default function ContactLayout({
