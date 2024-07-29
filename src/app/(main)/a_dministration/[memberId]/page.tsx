@@ -3,7 +3,6 @@
 
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
 import BackArrowIcon from '@/components/icons/back-arrow'
 import { CONFIG } from '@/constants/config'
 import InlineLoader from '@/components/InlineLoader'
@@ -18,7 +17,6 @@ interface Props {
 export default function MemberPublicPage({ params }: Props) {
   const [isLoading, setLoading] = useState(true)
   const [memberItem, setMember] = useState<AdministrationItem | undefined>(undefined)
-  const router = useRouter()
 
   useEffect(() => {
     setLoading(true)

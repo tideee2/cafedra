@@ -22,7 +22,7 @@ export default function PublicNewsList({ memberItem }: Props) {
   const membersData = Object.entries(memberItem)
     .filter(([key, _]) => !excessFields.includes(key))
     .map(([key, item]) => ({
-      // @ts-expect-error
+      // @ts-expect-error need to fix
       title: titles[key],
       key,
       data: item,

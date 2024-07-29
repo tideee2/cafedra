@@ -27,6 +27,7 @@ export const authorOptions = {
   },
   pattern: {
     message: 'Автор має містити тільки дозволені символи',
+    // eslint-disable-next-line regexp/no-obscure-range
     value: /^[а-щЬЮЯЇІЄҐa-z0-9 ;:."-,]*$/gi,
   },
 }
@@ -42,6 +43,7 @@ export const categoryOptions = {
   },
   pattern: {
     message: 'Автор має містити тільки дозволені символи',
+    // eslint-disable-next-line regexp/no-obscure-range
     value: /^[а-щЬЮЯЇІЄҐa-z0-9 ;:."-,]*$/gi,
   },
 }
@@ -53,6 +55,7 @@ export const contentOptions = {
   },
   pattern: {
     message: 'Назва має містити тільки дозволені символи',
+    // eslint-disable-next-line regexp/no-obscure-range
     value: /^[а-щЬЮЯЇІЄҐa-z0-9 ;\\:."\-,\n]*$/gi,
   },
 }

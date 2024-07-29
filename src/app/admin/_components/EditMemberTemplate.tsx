@@ -28,7 +28,6 @@ export default function EditMemberTemplate({ memberItem, onSave }: Partial<Props
       isValid,
     },
     control,
-    watch,
     setValue,
   } = useForm(({
     defaultValues: {
@@ -53,7 +52,6 @@ export default function EditMemberTemplate({ memberItem, onSave }: Partial<Props
     if (!formValue || !onSave) {
       return
     }
-    const formData = new FormData()
 
     onSave({
       pib: formValue?.pib,
@@ -73,7 +71,6 @@ export default function EditMemberTemplate({ memberItem, onSave }: Partial<Props
     }, memberItem?.id || null)
   }
 
-  const [fileUrlValue, setFileUrl] = useState<string>('')
   const formRef = useRef<HTMLFormElement | null>(null)
 
   const changePhoto = (file: File) => {
@@ -83,9 +80,6 @@ export default function EditMemberTemplate({ memberItem, onSave }: Partial<Props
     // todo fix ts error with never type
     setValue('photo', 'filed' as never)
     setFileImage(file)
-  }
-  const test = () => {
-    console.log({ ...errors })
   }
   return (
     <>

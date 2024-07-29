@@ -17,7 +17,7 @@ export default function MemberRow({ memberItem, onEdit, onDelete }: PublicationR
     <>
       <tr className="border-b border-gray-300">
         {
-          readyPublication.map(((tdValue, _, arr) => (
+          readyPublication.map(((tdValue, _) => (
             <td className="px-2 py-2" key={tdValue.key}>
               {tdValue.key === 'pib'
                 ? (

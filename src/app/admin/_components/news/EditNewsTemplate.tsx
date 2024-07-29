@@ -27,8 +27,6 @@ export default function EditNewsTemplate({ newsItem, onSave }: Partial<Props>) {
       errors,
       isValid,
     },
-    control,
-    watch,
     setValue,
   } = useForm(({
     defaultValues: {
@@ -46,7 +44,6 @@ export default function EditNewsTemplate({ newsItem, onSave }: Partial<Props>) {
     if (!formValue || !onSave) {
       return
     }
-    const formData = new FormData()
 
     onSave({
       title: formValue?.title || '',
@@ -59,16 +56,12 @@ export default function EditNewsTemplate({ newsItem, onSave }: Partial<Props>) {
     }, newsItem?.id || null)
   }
 
-  const [fileUrlValue, setFileUrl] = useState<string>('')
   const formRef = useRef<HTMLFormElement | null>(null)
 
   const changePhoto = (file: File) => {
     // todo fix ts error with never type
     setValue('image', 'filed' as never)
     setFileImage(file)
-  }
-  const test = () => {
-    console.log({ ...errors })
   }
   return (
     <>
