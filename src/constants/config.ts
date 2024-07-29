@@ -9,5 +9,6 @@ export const CONFIG = {
     administration: `${process.env.NEXT_PUBLIC_REMOTE_SERVER_URL}/administration`,
     news: `${process.env.NEXT_PUBLIC_REMOTE_SERVER_URL}/blog`,
     contacts: `${process.env.NEXT_PUBLIC_REMOTE_SERVER_URL}/contacts`,
+    scienceInfo: `${process.env.NEXT_PUBLIC_REMOTE_SERVER_URL}/science-info`,
   },
 }

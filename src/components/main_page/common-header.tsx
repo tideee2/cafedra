@@ -23,7 +23,7 @@ export default function CommonHeaderContent({ data }: Props) {
         <div
           className={`mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 pt-4 py-7 h-[650px] md:h-[560px] bg-contain bg-no-repeat bg-[image:var(--image-url)] ${wrapperClasses}`}
           // @ts-expect-error todo find how fix error with custom css props
-          style={{ '--image-url': `url(${data.img})` }}
+          style={{ '--image-url': `url(${data?.img || ''})` }}
         >
           <div className={`flex ${textWrapperClasses}`}>
             <div className={`flex flex-col max-w-max md:max-w-[460px] ${textAlignClasses}`}>

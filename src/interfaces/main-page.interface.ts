@@ -31,3 +31,16 @@ export interface MainPageContentInterface {
   sectionTitle: string
   mainItems: IMainPageItem[]
 }
+
+export interface SciencePageInfo {
+  id: number
+  title: string
+  text: string
+  img: string
+}
+export interface SciencePageInfoForSave {
+  title: string
+  text: string
+  img: string
+  file?: File
+}
