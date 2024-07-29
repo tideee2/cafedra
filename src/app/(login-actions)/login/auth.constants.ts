@@ -56,3 +56,21 @@ export const contentOptions = {
     value: /^[а-щЬЮЯЇІЄҐa-z0-9 ;\\:."\-,\n]*$/gi,
   },
 }
+export function commonOptions(title: string) {
+  return {
+    required: `Введіть ${title}`,
+    minLength: {
+      message: `${title} має бути більше 14 символів`,
+      value: 4,
+    },
+    maxLength: {
+      message: `${title} має бути менше 1000 символів`,
+      value: 1000,
+    },
+    pattern: {
+      message: `${title} має містити тільки дозволені символи`,
+      // eslint-disable-next-line regexp/no-obscure-range
+      value: /^[а-щЬЮЯЇІЄҐa-z0-9 ;:.\-"-,]*$/gi,
+    },
+  }
+}

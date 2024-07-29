@@ -9,3 +9,12 @@ export interface NewsItem {
 export type RequestNewsItem = NewsItem | {
   photo: File
 }
+export interface NewsItemForSave {
+  title: string
+  author: string
+  date: string
+  content: string
+  image: string
+  file?: File | string | null
+  filePath?: string
+}
