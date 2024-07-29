@@ -15,7 +15,7 @@ import InlineLoader from '@/components/InlineLoader'
 
 export default function ContactPage() {
   useEffect(() => {
-    document.documentElement.setAttribute('lang', 'ua')
+    document.documentElement.setAttribute('lang', 'uk')
   }, [])
 
   const { register, handleSubmit, formState: { errors } } = useForm()
@@ -74,24 +74,24 @@ export default function ContactPage() {
     <>
       <div className=" w-full bg-yellow-300 h-3/5 sm:flex flex-column flex-wrap lg:flex flex-row">
         <div className="flex flex-row flex-wrap basis-1/2  bg-custom-gray1 justify-center Calibri items-center">
-          <div className="text-lime-600 font-bold basis-2/3 text-xl mt-12 text-center">Контакти</div>
-          <div className="basis-2/3  space-y-3 text-xs mt-2 mb-6 font-bold">
+          <div className="text-lime-700 font-bold basis-2/3 text-xl mt-12 text-center">Контакти</div>
+          <div className="basis-2/3  space-y-3 mt-2 mb-6 font-bold">
             {
               isLoading
                 ? <InlineLoader />
                 : (
                     <>
                       <div className="mt-1">
-                        <div className=" text-custom-blue1 text-sm">Адреса</div>
-                        <div className="mt-1.5 tex-sm uppercase">{ data?.address }</div>
+                        <div className=" text-sky-700 text-sm">Адреса</div>
+                        <div className="mt-1.5 text-sm uppercase">{ data?.address }</div>
                       </div>
                       <div>
-                        <div className=" text-custom-blue1 text-sm">Телефон</div>
-                        <div className="mt-1.5 text-sm">{ data?.tel }</div>
+                        <div className=" text-sky-700 text-sm">Телефон</div>
+                        <div className="mt-1.5 text-sm uppercase">{ data?.tel }</div>
                       </div>
                       <div>
-                        <div className=" text-custom-blue1 text-sm">Електронна пошта</div>
-                        <div className="mt-1.5 texts-sm uppercase">{ data?.tel }</div>
+                        <div className=" text-sky-700 text-sm">Електронна пошта</div>
+                        <div className="mt-1.5 text-sm uppercase">{ data?.tel }</div>
                       </div>
                     </>
                   )
@@ -107,7 +107,7 @@ export default function ContactPage() {
           <div className="basis-4/5 mb-3">
             <form className="flex flex-row flex-wrap text-xs basis-full" onSubmit={handleSubmit(myfunc)}>
               <div className="lg:flex flex-column basis-full sm:flex flex-row">
-                <div className="basis-1/2 sm:mt-5 mb-5 lg:mt-0">
+                <div className="basis-1/2 sm:mt-5 mb-5 lg:mt-5">
                   <label htmlFor="user_name">Ім`я</label><br />
                   <input
                     className="p-2 mt-2 w-full border-none text-black focus:border-solid border-2 border-red-600 outline-none"
@@ -119,7 +119,7 @@ export default function ContactPage() {
                   {errors.firstName && <p className="text-lime-200 mt-1">Ім`я має містити від 2 до 50 символів</p>}
                 </div>
 
-                <div className="basis-1/2 sm:ml-0 lg:ml-5 mt-0">
+                <div className="basis-1/2 sm:ml-0 md:ml-2 mt-5 lg:m-5">
                   <label htmlFor="user_email">Електронна пошта</label><br />
                   <input
                     className="p-2 mt-2 w-full border-none text-black focus:border-solid border-2 border-red-600 outline-none"
