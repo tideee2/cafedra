@@ -107,9 +107,10 @@ export default function EditNewsTemplate({ newsItem, onSave }: Partial<Props>) {
                 placeholder="Введіть дату новини"
                 title="Дата новини"
                 type="datepicker"
-                {...register('date', {
-                  required: 'Оберіть дату',
-                })}
+                {...register('date', { required: 'Оберіть дату новини', pattern: {
+                  message: 'Не правильний формат дати',
+                  value: /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12]\d|3[01])$/,
+                } })}
               />
               <p className="text-xs text-red-700">{ errors?.date?.message }</p>
             </div>

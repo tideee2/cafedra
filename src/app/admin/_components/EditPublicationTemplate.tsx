@@ -42,6 +42,7 @@ export default function EditPublicationTemplate({ publication, onSave }: Partial
       date: formatDate(publication?.dateStr) || '',
       content: publication?.content || '',
     },
+    mode: 'all',
   }))
 
   const onSubmit = () => {
@@ -138,7 +139,10 @@ export default function EditPublicationTemplate({ publication, onSave }: Partial
                   placeholder="Виберіть дату"
                   showCounter={false}
                   title="Дата публікаці"
-                  {...register('date', { required: 'Оберіть дату публікації' })}
+                  {...register('date', { required: 'Оберіть дату публікації', pattern: {
+                    message: 'Не правильний формат дати',
+                    value: /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12]\d|3[01])$/,
+                  } })}
                   type="datepicker"
                 />
                 <p className="text-xs text-red-700">{ errors?.date?.message }</p>
