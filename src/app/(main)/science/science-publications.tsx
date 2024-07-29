@@ -72,13 +72,13 @@ export default function SciencePublications() {
       <div className="w-full bg-update-bg pt-5 pb-10">
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
           <div className="flex flex-col justify-between items-center pt-12 pb-6">
-            <h3 className="mb-5 text-green text-center font-black text-4xl self-center">Усі публікаці факультету</h3>
+            <h2 className="mb-5 text-accent-green text-center font-black text-4xl self-center">Усі публікаці факультету</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7 text-text-primary my-12 relative">
               { isLoading && !publications?.length
                 ? <div hidden={!isLoading}><Loader /></div>
                 : publications?.map((publication, index) => (
                   <div className="p-7 bg-white flex flex-col" key={publication.id}>
-                    <h2 className="font-bold text-xl mb-5 text-update-blue">{ sliceStr(publication.title, 47) }</h2>
+                    <h3 className="font-bold text-xl mb-5 text-update-blue">{ sliceStr(publication.title, 47) }</h3>
                     <div className="flex-1"></div>
                     <p
                       className={`text-xl mb-10 ${styles.cardTitleLine}`}

@@ -9,7 +9,7 @@ export default function MainPageContent({ mainPageContent }: Props) {
     <>
       <section className="my-5 lg:my-14">
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 text-text-primary">
-          <h2 className="text-center uppercase font-bold text-green text-2xl mb-14">{mainPageContent?.sectionTitle}</h2>
+          <h2 className="text-center uppercase font-bold text-accent-green text-2xl mb-14">{mainPageContent?.sectionTitle}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {
               mainPageContent?.mainItems.map((item, index) => (

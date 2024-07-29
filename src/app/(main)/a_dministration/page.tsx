@@ -33,7 +33,7 @@ export default function AdministrationPage() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                       {
                         members.map((member: AdministrationItem) => (
-                          <div className="flex flex-col text-center border-accent-green text-update-blue hover:opacity-80 hover:underline ">
+                          <div className="flex flex-col text-center border-accent-green text-secondary-blue font-bold hover:opacity-80 hover:underline ">
                             <Link className="flex flex-col gap-3 p-4" href={`/a_dministration/${member.id}`} title={member.pib}>
                               <img
                                 alt={member.pib}

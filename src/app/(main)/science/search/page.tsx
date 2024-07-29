@@ -82,7 +82,7 @@ export default function ScienceSearchPage() {
             знайдено { publications?.length || 0 } результат(ів).
           </div>
           <div className="flex justify-center gap-5 w-full py-8">
-            <label hidden={true} htmlFor="search_field">Введіть назву або ключове слово</label>
+            <label className="invisible w-0 h-0" htmlFor="search_field">Введіть назву або ключове слово</label>
             <input
               className="flex-1 py-5 px-6 w-full lg:min-w-[400px] placeholder-gray placeholde:font-normal text-lg font-bold text-text-primary"
               id="search_field"

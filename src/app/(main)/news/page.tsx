@@ -34,7 +34,7 @@ export default function NewsPage() {
                       {
                         newsItems.map((newItem: NewsItem) => (
                           <div
-                            className="flex flex-col text-center border-accent-green text-update-blue hover:opacity-80 hover:underline "
+                            className="flex flex-col text-center border-accent-green text-secondary-blue font-bold hover:opacity-80 hover:underline "
                             key={newItem.id}
                           >
                             <Link
