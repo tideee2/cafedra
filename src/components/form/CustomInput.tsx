@@ -16,6 +16,7 @@ interface InputInterface {
   placeholder: string
   initialValue: string
   id: string
+  className: string | string[]
 }
 
 function getElementType(type: string | undefined) {
@@ -34,8 +35,17 @@ function getElementType(type: string | undefined) {
 }
 export type Ref = HTMLInputElement | HTMLTextAreaElement
 
-export default forwardRef<Ref, Partial<InputInterface>>(function CounterInput(
-  { id, initialValue = '', title, maxCount, type, placeholder, showCounter = true, ...props },
+export default forwardRef<Ref, Partial<InputInterface>>(function CustomInput(
+  { id,
+    initialValue = '',
+    title,
+    maxCount,
+    type,
+    placeholder,
+    showCounter = false,
+    className,
+    ...props
+  },
   ref,
 ) {
   const [counter, setCounter] = useState(0)
@@ -102,12 +112,12 @@ export default forwardRef<Ref, Partial<InputInterface>>(function CounterInput(
               ? (
                   <>
                     <textarea
-                      className="w-full p-5 border-[3px] border-secondary-blue min-h-40"
-                      defaultValue={inputValue}
+                      className={`${className} w-full p-5 border-[3px] border-secondary-blue min-h-40`}
                       id={id}
                       onInput={onInput}
                       placeholder={placeholder}
                       ref={ref as any}
+                      value={inputValue}
                       {...props}
                     >
                     </textarea>
@@ -115,7 +125,7 @@ export default forwardRef<Ref, Partial<InputInterface>>(function CounterInput(
                 )
               : (
                   <input
-                    className={`w-full p-5 border-[3px] border-secondary-blue ${additionalStyles}`}
+                    className={`${className} w-full p-5 border-[3px] border-secondary-blue ${additionalStyles} `}
                     id={id}
                     onInput={onInput}
                     placeholder={placeholder}

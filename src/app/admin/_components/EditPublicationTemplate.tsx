@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { usePathname } from 'next/navigation'
 import type { BaseSyntheticEvent } from 'react'
 import { useRef, useState } from 'react'
-import CounterInput from '@/components/form/CounterInput'
+import CustomInput from '@/components/form/CustomInput'
 import CustomButton from '@/components/custom-button'
 import LoadIcon from '@/components/icons/LoadIcon'
 import type { SciencePublication, SciencePublicationForSave } from '@/interfaces/science'
@@ -96,10 +96,11 @@ export default function EditPublicationTemplate({ publication, onSave }: Partial
         <div className="flex flex-col p-10 bg-white">
           <div className="w-full w-max[800px] ">
             <div className="pb-8 h-[140px]">
-              <CounterInput
+              <CustomInput
                 initialValue={publication?.title}
                 maxCount={120}
                 placeholder="Введіть назву публікації"
+                showCounter={true}
                 title="Назва публікації"
                 type="regular"
                 {...register('title', titleOptions)}
@@ -108,7 +109,7 @@ export default function EditPublicationTemplate({ publication, onSave }: Partial
             </div>
             <div className="pb-2 flex justify-between gap-3 h-[150px]">
               <div>
-                <CounterInput
+                <CustomInput
                   initialValue={publication?.author}
                   placeholder="Введіть автора публікації"
                   showCounter={false}
@@ -120,7 +121,7 @@ export default function EditPublicationTemplate({ publication, onSave }: Partial
               </div>
 
               <div>
-                <CounterInput
+                <CustomInput
                   initialValue={publication?.categories[0].category}
                   placeholder="Введіть категорію"
                   showCounter={false}
@@ -132,7 +133,7 @@ export default function EditPublicationTemplate({ publication, onSave }: Partial
               </div>
 
               <div>
-                <CounterInput
+                <CustomInput
                   initialValue={publication?.dateStr}
                   placeholder="Виберіть дату"
                   showCounter={false}
@@ -144,7 +145,7 @@ export default function EditPublicationTemplate({ publication, onSave }: Partial
               </div>
             </div>
             <div className="pb-8">
-              <CounterInput
+              <CustomInput
                 initialValue={publication?.content}
                 placeholder="Вступне слово про тему та її актуальність"
                 showCounter={false}

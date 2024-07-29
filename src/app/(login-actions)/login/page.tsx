@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { deleteCookie, setCookie } from 'cookies-next'
 import HeaderLogo from '@/components/header/logo/header-logo'
-import CounterInput from '@/components/form/CounterInput'
+import CustomInput from '@/components/form/CustomInput'
 import CustomButton from '@/components/custom-button'
 import Loader from '@/components/Loader'
 
@@ -72,8 +72,8 @@ export default function CommonScienceAdminPage() {
               commonError ? <p className="text-red-700">{commonError}</p> : null
             }
             <div className="mb-10 h-[100px]">
-              <CounterInput
-                id="email"
+              <CustomInput
+                id="login"
                 placeholder="Введіть логін"
                 {...register('email', {
                   required: 'Введіть логін',
@@ -94,7 +94,7 @@ export default function CommonScienceAdminPage() {
             </div>
 
             <div className="mb-10 h-[100px]">
-              <CounterInput
+              <CustomInput
                 showCounter={false}
                 title="Пароль"
                 type="password"

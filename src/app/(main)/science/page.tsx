@@ -6,7 +6,7 @@ import SciencePublications from '@/app/(main)/science/science-publications'
 export default function SciencePage() {
   return (
     <>
-      <CommonHeaderContent props={sciencePageHeaderInfo} />
+      <CommonHeaderContent data={sciencePageHeaderInfo} />
       <ScienceMainPage />
       <SciencePublications />
     </>

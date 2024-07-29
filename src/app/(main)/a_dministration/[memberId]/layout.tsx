@@ -2,20 +2,24 @@ import type { ReactNode } from 'react'
 import React from 'react'
 import type { Metadata } from 'next'
 import { CONFIG } from '@/constants/config'
+import type { AdministrationItem } from '@/interfaces/administration-item'
 
 interface Props {
-  params: { publicationId: string }
+  params: { memberId: string }
 }
 export async function generateMetadata(
   { params }: Props,
 ): Promise<Metadata> {
-  const publication = await fetch(`${CONFIG.api.publications}/${Number(params.publicationId)}`).then(res => res.json())
+  const member: AdministrationItem = await fetch(`${CONFIG.api.administration}/${Number(params.memberId)}`)
+    .then(res => res.json())
 
+  const title = member.pib ? `Сторінка ${member.pib}` : ''
   return {
-    title: publication?.title || '',
+    title,
     openGraph: {
-      title: publication?.title || '',
-      description: publication?.description || '',
+      title,
+      images: member.photo ? [member.photo] : [],
+      url: 'https://cafedra-neon.vercel.app/',
     },
   }
 }
