@@ -36,7 +36,7 @@ export default function NewsCreatePage() {
         console.log(res)
       })
       .then(() => {
-        router.push('/admin/a_dministration')
+        router.push('/admin/news')
       })
       .catch(e => console.log(e))
       .finally(() => setIsLoading(false))
