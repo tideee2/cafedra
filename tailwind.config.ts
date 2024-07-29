@@ -49,7 +49,7 @@ const config: Config = {
         'custom-red': '#B90000',
         'accent-green': '#597818',
         'custom-blue1': '#3a72b7',
-        'custom-gray1': '#ededed',
+        'custom-gray1': '#F8F8F8',
       },
     },
   },
