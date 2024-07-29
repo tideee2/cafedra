@@ -19,7 +19,6 @@ export default function Home() {
     fetch(`${CONFIG.api.mainPage}`)
       .then(res => res.json())
       .then((data: MainPageInterface[]) => {
-        console.log('==', data)
         if (!data?.length) {
           return
         }
@@ -33,9 +32,14 @@ export default function Home() {
               }]
             : [],
         })
-        console.log(data)
+        const mainItems = (data[0]?.mainItems || [])
+          .map(((item, index) => ({
+            ...item,
+            // @ts-expect-error need to fix
+            img: data[0][`itemImg${index + 1}`],
+          })))
         setPageContent({
-          mainItems: data[0]?.mainItems?.slice(0, 3) || [],
+          mainItems,
           sectionTitle: data[0]?.sectionTitle || '',
         })
       })

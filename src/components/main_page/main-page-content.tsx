@@ -12,10 +12,16 @@ export default function MainPageContent({ mainPageContent }: Props) {
           <h2 className="text-center uppercase font-bold text-green text-2xl mb-14">{mainPageContent?.sectionTitle}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {
-              mainPageContent?.mainItems.map((item, _index) => (
+              mainPageContent?.mainItems.map((item, index) => (
                 <div className="grid gap-8 grid-rows-[156px_50px_1fr] border-b-8 border-green pb-4" key={item.id}>
                   <div className="flex justify-center items-end">
-                    <img alt={item.itemTitle} className="max-h-[153px] w-auto md:h-auto md:w-full" height={100} src={item.img} width={166} />
+                    <img
+                      alt={item.itemTitle}
+                      className="max-h-[153px] w-auto md:h-auto md:w-full"
+                      height={100}
+                      src={item.img}
+                      width={166}
+                    />
                   </div>
                   <h3 className="font-bold text-xl card-title-line text-update-blue">{item.itemTitle}</h3>
                   <p className="font-medium text-lg self-stretch">{item.text}</p>

@@ -5,6 +5,9 @@ export interface MainPageInterface {
   name: string
   subTitle: string
   sectionTitle: string
+  itemImg1: string
+  itemImg2: string
+  itemImg3: string
   mainItems: IMainPageItem[]
 }
 export interface IMainPageItem {

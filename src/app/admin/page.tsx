@@ -44,15 +44,23 @@ export default function CommonScienceAdminPage() {
     fetch(`${CONFIG.api.mainPage}`)
       .then(res => res.json())
       .then((requestData: MainPageInterface[]) => {
+        console.log(requestData[0])
+        const mainItems = (requestData[0]?.mainItems || [])
+          .map(((item, index) => ({
+            ...item,
+            // @ts-expect-error need to fix
+            img: requestData[0][`itemImg${index + 1}`],
+          })))
+        console.log(mainItems)
         setData({
           ...requestData[0],
-          mainItems: requestData[0].mainItems.slice(0, 3),
+          mainItems,
         })
         setValue('title', requestData[0].title)
         setValue('subTitle', requestData[0].subTitle)
         setValue('sectionTitle', requestData[0].sectionTitle)
         setValue('img', requestData[0].img)
-        setValue('mainItems', requestData[0].mainItems.slice(0, 3))
+        setValue('mainItems', mainItems.slice(0, 3))
       })
       .catch(e => console.log(e))
       .finally(() => setLoading(false))
@@ -77,13 +85,12 @@ export default function CommonScienceAdminPage() {
       })),
     }))
 
-    console.log(images)
     if (images) {
       if (images.img) {
         formData.set('img', images.img)
       }
       else {
-        formData.append('img', new File([], ''))
+        // formData.append('img', new File([], ''))
       }
       const mainItemsImages = Object.entries(images).map(([key, value]) => {
         if (key === 'img') {
@@ -94,19 +101,12 @@ export default function CommonScienceAdminPage() {
       }).filter(Boolean)
 
       if (mainItemsImages?.length) {
-        mainItemsImages.forEach((image) => {
+        mainItemsImages.forEach((image, index) => {
           if (image) {
-            formData.append('mainItemImgs[]', image)
+            formData.append(`itemImg${index + 1}`, image)
           }
         })
       }
-      else {
-        formData.append('mainItemImgs', new File([], ''))
-      }
-    }
-    else {
-      formData.append('img', new File([], ''))
-      formData.append('mainItemImgs', new File([], ''))
     }
 
     fetch(`${CONFIG.api.mainPage}`, {
@@ -115,6 +115,7 @@ export default function CommonScienceAdminPage() {
     })
       .then(res => res.json())
       .then((requestData: MainPageInterface[]) => {
+        console.log(requestData)
       })
   }
 
