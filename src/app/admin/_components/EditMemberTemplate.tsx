@@ -131,7 +131,7 @@ export default function EditMemberTemplate({ memberItem, onSave }: Partial<Props
               <CustomInput
                 initialValue={memberItem?.phone}
                 placeholder="Введіть телефон члена кафедри"
-                title="Телефон рівень члена кафедри"
+                title="Телефон члена кафедри"
                 type="regular"
                 {...register('phone')}
               />
