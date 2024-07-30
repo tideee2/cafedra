@@ -12,3 +12,19 @@
   line-height: 0;
   text-indent: -1000px;
 }
+.accessWrapper {
+  transition: all 0.3s ease-in-out;
+}
+.accessBtn {
+  transition: all 0.3s ease-in-out;
+  width: 100%;
+  svg {
+    transition: all 0.3s ease-in-out;
+    transform: scale(1, 1);
+  }
+  &:hover {
+    svg {
+      transform: scale(1.3, 1.3);
+    }
+  }
+}
