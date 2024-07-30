@@ -33,6 +33,7 @@ export default function EditPublicationTemplate({ publication, onSave }: Partial
       isValid,
     },
     control,
+    clearErrors,
     watch,
   } = useForm(({
     defaultValues: {
@@ -41,6 +42,7 @@ export default function EditPublicationTemplate({ publication, onSave }: Partial
       category: publication?.categories[0].category || '',
       date: formatDate(publication?.dateStr) || '',
       content: publication?.content || '',
+      pdfFile: '',
     },
     mode: 'all',
   }))
@@ -82,6 +84,14 @@ export default function EditPublicationTemplate({ publication, onSave }: Partial
     if (!fileInput?.current?.files?.length) {
       return
     }
+    if (fileInput.current.files[0].type !== 'application/pdf') {
+      control.setError('pdfFile', {
+        type: 'value',
+        message: 'Додайте файл у форматі pdf',
+      })
+      return
+    }
+    clearErrors('pdfFile')
     const blob = new Blob([fileInput.current.files[0]], { type: 'application/pdf' })
     setFilePath(URL.createObjectURL(blob))
     setFileUrl(fileInput.current.value)
@@ -167,12 +177,13 @@ export default function EditPublicationTemplate({ publication, onSave }: Partial
               <div className="flex gap-5 items-center ">
                 <a
                   className="text-xl text-blue-600 hover:underline"
-                  hidden={!filePath}
+                  hidden={!filePath || !!errors?.pdfFile?.message}
                   href={filePath}
                   target="_blank"
                 >Переглянути файл
                 </a>
                 <span className="text-xs text-red-700" hidden={!!filePath}>Файл не додано</span>
+                <span className="text-xs text-red-700" hidden={!errors?.pdfFile?.message}>{errors?.pdfFile?.message}</span>
                 <input
                   accept=".pdf"
                   defaultValue={fileUrlValue}
