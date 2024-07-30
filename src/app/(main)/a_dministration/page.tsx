@@ -34,9 +34,9 @@ export default function AdministrationPage() {
                       {
                         members.map((member: AdministrationItem) => (
                           <div className="flex flex-col text-center border-accent-green text-secondary-blue font-bold hover:opacity-80 hover:underline ">
-                            <Link className="flex flex-col gap-3 p-4" href={`/a_dministration/${member.id}`} title={member.pib}>
+                            <Link className="flex flex-col gap-3 p-4" href={`/a_dministration/${member.id}`}>
                               <img
-                                alt={member.pib}
+                                alt={`фото ${member.pib}`}
                                 className="w-full h-[200px]"
                                 height={100}
                                 src={member.photo}
