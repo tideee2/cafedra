@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { CONFIG } from '@/constants/config'
 import type { NewsItem } from '@/interfaces/news-item'
+import { sliceStr } from '@/hooks/utils'
 
 export default function NewsPage() {
   const [newsItems, setNewsItems] = useState<NewsItem[]>([])
@@ -34,11 +35,11 @@ export default function NewsPage() {
                       {
                         newsItems.map((newItem: NewsItem) => (
                           <div
-                            className="flex flex-col text-center border-accent-green text-secondary-blue font-bold hover:opacity-80 hover:underline "
+                            className="flex flex-col text-center border-accent-green"
                             key={newItem.id}
                           >
                             <Link
-                              className="flex flex-col gap-3 p-4"
+                              className="flex flex-col gap-3 p-4 text-secondary-blue font-bold hover:opacity-80 hover:underline"
                               href={`/news/${newItem.id}`}
                               title={newItem.title}
                             >
@@ -52,6 +53,7 @@ export default function NewsPage() {
                               />
                               { newItem.title }
                             </Link>
+                            <p>{sliceStr(newItem.content, 100)}</p>
                           </div>
                         ))
                       }

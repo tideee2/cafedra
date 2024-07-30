@@ -18,3 +18,12 @@ export function dateFormatForStore(strDate: string | undefined) {
     .reverse()
     .join(' / ')
 }
+export function sliceStr(str: string, count = 100) {
+  if (!str?.length) {
+    return '...'
+  }
+  if (str.length <= count) {
+    return str
+  }
+  return `${str.slice(0, count)}...`
+}
