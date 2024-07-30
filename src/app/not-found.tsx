@@ -11,7 +11,7 @@ import Footer from '@/components/footer'
 
 export default function NotFound() {
   const headersList = headers()
-  const referer = headersList.get('Referer')
+  const referer = headersList.get('referer')
   return (
     <main className="flex min-h-screen flex-col bg-update-bg" id="content">
       <Header />
