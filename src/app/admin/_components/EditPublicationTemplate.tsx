@@ -35,6 +35,9 @@ export default function EditPublicationTemplate({ publication, onSave }: Partial
     control,
     clearErrors,
     watch,
+    setValue,
+    resetField,
+    reset,
   } = useForm(({
     defaultValues: {
       title: publication?.title || '',
@@ -89,11 +92,15 @@ export default function EditPublicationTemplate({ publication, onSave }: Partial
         type: 'value',
         message: 'Додайте файл у форматі pdf',
       })
+      setValue('pdfFile', '')
       return
     }
-    clearErrors('pdfFile')
+    reset({
+      pdfFile: '',
+    })
     const blob = new Blob([fileInput.current.files[0]], { type: 'application/pdf' })
     setFilePath(URL.createObjectURL(blob))
+    setValue('pdfFile', URL.createObjectURL(blob))
     setFileUrl(fileInput.current.value)
   }
   return (
