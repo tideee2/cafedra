@@ -43,8 +43,8 @@ export default function Header() {
         <nav className="">
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 pt-2">
             <div className="flex flex-col">
-              <div className={`flex justify-end `}>
-                <div className={`${styles.accessWrapper} flex gap-3 w-[320px] ${accessibilityMenuVisible ? 'w-auto' : ''}`}>
+              <div className={`flex justify-center sm:justify-end `}>
+                <div className={`${styles.accessWrapper} flex flex-col md:flex-row gap-3 ${accessibilityMenuVisible ? 'w-auto' : ''}`}>
                   <button className={`${styles.accessBtn} flex gap-2`} onClick={changeAccessibilityMenuVisibility}>
                     <GlassesIcon className="size-5 glass-icon" />
                     <span className="text-md font-bold uppercase">Людям&nbsp;з&nbsp;порушенням&nbsp;зору</span>
