@@ -74,9 +74,6 @@ export default function EditMemberTemplate({ memberItem, onSave }: Partial<Props
   const formRef = useRef<HTMLFormElement | null>(null)
 
   const changePhoto = (file: File) => {
-    console.log(file)
-    console.log(control._formValues)
-    console.log(control.getFieldState('photo'))
     // todo fix ts error with never type
     setValue('photo', 'filed' as never)
     setFileImage(file)

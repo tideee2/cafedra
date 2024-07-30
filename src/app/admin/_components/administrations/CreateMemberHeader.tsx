@@ -26,7 +26,7 @@ export default function CreateMemberHeader({ title, isDisabledSave = false, ...p
         <div className="flex gap-2">
           <CustomButton
             className="flex gap-2 items-center normal-case !p-4"
-            href="/admin/science"
+            href="/admin/a_dministration"
             type="regularLink"
           ><CancelIcon className="size-6" />Відхилити
           </CustomButton>
