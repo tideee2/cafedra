@@ -16,7 +16,7 @@ export default function MainPageContent({ mainPageContent }: Props) {
                 <div className="grid gap-8 grid-rows-[156px_50px_1fr] border-b-8 border-green pb-4" key={item.id}>
                   <div className="flex justify-center items-end">
                     <img
-                      alt={item.itemTitle}
+                      alt={`малюнок ${item.itemTitle}`}
                       className="max-h-[153px] w-auto md:h-auto md:w-full"
                       height={100}
                       src={item.img}
