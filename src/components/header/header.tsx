@@ -63,7 +63,7 @@ export default function Header() {
                   <HeaderLogo />
                   <div className="flex-1"></div>
                   <div className="hidden md:ml-6 md:flex items-center">
-                    <div className="flex space-x-1 lg:space-x-4 flex-wrap">
+                    <div className="flex space-x-1 lg:space-x-4 lg:flex-wrap">
                       <HeaderLinks linkClick={linkClick} />
                     </div>
                   </div>

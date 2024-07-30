@@ -11,13 +11,13 @@ export default function HeaderLogo({ className, type, isShort }: Partial<LogoPro
   return (
     <Link className={classes + className} href="/#" target="cafedra link">
       <svg
+        // @ts-expect-error accessibility error fix
+        alt="cafedra logo"
         className="w-20 h-full text-white"
         height="115"
         viewBox="0 0 183 115"
         width="183"
         xmlns="http://www.w3.org/2000/svg"
-          // @ts-ignore
-        alt="cafedra logo"
       >
         <image
           // @ts-expect-error todo change to image
@@ -29,7 +29,7 @@ export default function HeaderLogo({ className, type, isShort }: Partial<LogoPro
         />
       </svg>
 
-      <h1 className={`${isShort ? 'hidden' : ''}  flex pl-1 lg:pl-2 hover:text-green font-bold uppercase text-sm lg:text-base ${type === 'sidebar' ? 'text-center' : 'min-w-40'}`}>Інформаційні<br />системи&nbsp;та<br />мережі
+      <h1 className={`${isShort ? 'hidden' : ''}  flex pl-1 lg:pl-2 hover:text-green font-bold uppercase text-sm lg:text-base ${type === 'sidebar' ? 'text-center' : 'lg:min-w-40'}`}>Інформаційні<br />системи&nbsp;та<br />мережі
       </h1>
     </Link>
   )
