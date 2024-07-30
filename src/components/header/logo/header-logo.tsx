@@ -9,7 +9,7 @@ interface LogoProps {
 export default function HeaderLogo({ className, type, isShort }: Partial<LogoProps>) {
   const classes = `flex flex-shrink text-accent-green flex-grow-0 items-center hover:text-green hover:fill-primary ${styles.logoLink}`
   return (
-    <Link className={classes + className} href="/" target="cafedra link">
+    <Link className={classes + className} href="/#" target="cafedra link">
       <svg
         className="w-20 h-full text-white"
         height="115"

@@ -5,7 +5,7 @@ import { HeaderType } from '@/interfaces/header-interfaces'
 export const headerLinks: IHeaderLink[] = [
   {
     title: 'Про факультет',
-    href: '/#',
+    href: '/',
   },
   {
     title: 'Новини',
