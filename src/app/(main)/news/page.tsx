@@ -53,7 +53,7 @@ export default function NewsPage() {
                               />
                               { newItem.title }
                             </Link>
-                            <p>{sliceStr(newItem.content, 100)}</p>
+                            <p className="break-all">{sliceStr(newItem.content, 100)}</p>
                           </div>
                         ))
                       }

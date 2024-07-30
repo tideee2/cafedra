@@ -23,8 +23,8 @@ export default function MainPageContent({ mainPageContent }: Props) {
                       width={166}
                     />
                   </div>
-                  <h3 className="font-bold text-xl card-title-line text-update-blue">{item.itemTitle}</h3>
-                  <p className="font-medium text-lg self-stretch">{item.text}</p>
+                  <h3 className="font-bold text-xl card-title-line text-update-blue break-all">{item.itemTitle}</h3>
+                  <p className="font-medium text-lg self-stretch break-all">{item.text}</p>
                 </div>
               ))
             }

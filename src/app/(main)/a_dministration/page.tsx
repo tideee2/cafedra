@@ -42,7 +42,7 @@ export default function AdministrationPage() {
                                 src={member.photo}
                                 width={100}
                               />
-                              { member.pib }
+                              <span className="break-all"> { member.pib }</span>
                             </Link>
                           </div>
                         ))
