@@ -11,7 +11,7 @@ import Footer from '@/components/footer'
 
 export default function NotFound() {
   const headersList = headers()
-  const referer = headersList.get('referer')
+  const path = headersList.get('x-current-path')
   return (
     <main className="flex min-h-screen flex-col bg-update-bg" id="content">
       <Header />
@@ -19,7 +19,7 @@ export default function NotFound() {
         <Link href="https://cafedra-neon.vercel.app/">Повернутися на головну сторінку</Link>
       </div>
       <div className="w-full h-52 text-xl bg-custom-gray1 p-12">Нажаль
-        <span className="font-bold">, { referer }
+        <span className="font-bold">, { `${path}` }
         </span> - Сторінка не знайдена
       </div>
       <div className="flex-grow"></div>

@@ -16,4 +16,7 @@ export function middleware(request: NextRequest) {
       return NextResponse.rewrite(new URL('/login', request.url))
     }
   }
+  const headers = new Headers(request.headers)
+  headers.set('x-current-path', request.nextUrl.pathname)
+  return NextResponse.next({ headers })
 }
